@@ -26,7 +26,6 @@ class PlayScreen extends Component {
 const mapStateToProps = state => {
  return	{ 
 	 test: state.textReducer.test,
- 	 shit: state.textReducer.shit
  	}
 }
 

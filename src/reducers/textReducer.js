@@ -1,16 +1,10 @@
-const initial_state = { shit: 'shit', test: 'Hello?' }
+const initial_state = { test: 'Hello?' }
 
 export default (state = initial_state, action) => {
 	switch(action.type) {
 		case 'test':
-			console.log('test reducer fired')
-			console.log('action: ', action)
-			console.log('state: ', state)
 			return { ...state, test: action.payload }
 		default:
-			console.log('test default fired')
-			console.log('action: ', action)
-			console.log('state: ', state)
 			return state
 	}
 }
