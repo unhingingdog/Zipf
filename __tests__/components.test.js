@@ -1,15 +1,26 @@
-import React from 'react'
-import { mount } from 'enzyme'
 import PlayScreen from '../src/components/PlayScreen'
-import renderer from 'react-test-renderer'
+import React from 'react';
+import Enzyme, { shallow } from 'enzyme';
+import configureStore from 'redux-mock-store';
+import Adapter from 'enzyme-adapter-react-16'
+Enzyme.configure({ adapter: new Adapter() })
 
-describe('Components', () => {
-	describe('PlayScreen', () => {
-		it('renders correctly', () => {
-			const tree = renderer.create(
-				<PlayScreen />
-			).toJSON
-			expect(tree).toMatchSnapshot()
-		})
-	})
-})
+const middleware = []
+const mockStore = configureStore(middleware);
+
+const initialState = {
+	textReducer: { test: 'Hello?' }
+}
+
+describe('Testing PlayScreen', () => {
+  it('renders as expected', () => {
+    const wrapper = shallow(
+      <PlayScreen />,
+      { context: { store: mockStore(initialState) } },
+    );
+    expect(wrapper.dive()).toMatchSnapshot();
+  });
+});
+
+
+
