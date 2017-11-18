@@ -18,18 +18,3 @@ test('renders correctly', () => {
   ).toJSON();
   expect(tree).toMatchSnapshot();
 });
-
-describe('TextEditor component', () => {
-	let wrapper
-	beforeEach(() => {
-		wrapper = shallow(<TextEditor />)
-		
-	  it('should render text component', () => {
-			expect(wrapper.find('Text')).toHaveLength(1)
-		})
-		
-		it('text component should contain text', () => {
-			expect(wrapper.find('Text').contains('Hellho?')).toBe(true)
-		})
-	})
-})

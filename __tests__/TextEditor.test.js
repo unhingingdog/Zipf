@@ -1,16 +1,23 @@
-import { shallowToJson } from 'enzyme-to-json';
-import React from 'react'
-import 'react-native'
-import Enzyme, { shallow, mount } from 'enzyme'
+//import { shallowToJson } from 'enzyme-to-json';
+//import React from 'react'
+//import 'react-native'
 import Adapter from 'enzyme-adapter-react-16'
 import TextEditor from '../src/components/TextEditor'
-import renderer from 'react-test-renderer';
+//import renderer from 'react-test-renderer';
+//
 
+
+
+import React from 'react';
+import Enzyme, { shallow } from 'enzyme';
 Enzyme.configure({ adapter: new Adapter() })
+import { View, Text, StyleSheet } from 'react-native';
+import { expect } from 'chai';
 
-it('renders correctly', () => {
-  const tree = renderer.create(
-    <TextEditor />
-    ).toJSON();
-  expect(tree).toMatchSnapshot();
+describe('<TextEditor />', () => {
+  it('should render stuff', () => {
+    const wrapper = shallow(<TextEditor />);
+    expect(wrapper.length).to.equal(1);
+    expect(wrapper.contains(<Text>Hello</Text>)).to.equal(true);
+  });
 });
