@@ -6,6 +6,7 @@
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
     "enzyme-redux": "^0.1.7",
+    "enzyme-to-json": "^3.2.2",
     "jest": "^21.2.1",
     "jest-expo": "^22.0.0",
     "react-dom": "^16.1.1",
@@ -23,9 +24,9 @@
     "test": "node node_modules/jest/bin/jest.js --watch"
   },
   "jest": {
-    "preset": "jest-expo",
+    "preset": "react-native",
     "snapshotSerializers": [
-      "./node_modules/jest-serializer-enzyme"
+      "./node_modules/enzyme-to-json"
     ]
   },
   "dependencies": {
