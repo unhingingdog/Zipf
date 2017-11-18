@@ -61,8 +61,8 @@
     join-component "^1.1.0"
 
 "@types/node@*":
-  version "8.0.52"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.52.tgz#8e7f47747868e7687f2cd4922966e2d6af78d22d"
+  version "8.0.53"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.53.tgz#396b35af826fa66aad472c8cb7b8d5e277f4e6d8"
 
 Base64@~0.1.3:
   version "0.1.4"
@@ -571,6 +571,12 @@ babel-plugin-react-transform@2.0.2:
   dependencies:
     lodash "^4.6.1"
 
+babel-plugin-react-transform@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-react-transform/-/babel-plugin-react-transform-3.0.0.tgz#402f25137b7bb66e9b54ead75557dfbc7ecaaa74"
+  dependencies:
+    lodash "^4.6.1"
+
 babel-plugin-syntax-async-functions@^6.5.0, babel-plugin-syntax-async-functions@^6.8.0:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.13.0.tgz#cad9cad1191b5ad634bf30ae0872391e0647be95"
@@ -582,6 +588,10 @@ babel-plugin-syntax-class-properties@^6.5.0, babel-plugin-syntax-class-propertie
 babel-plugin-syntax-decorators@^6.1.18:
   version "6.13.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-syntax-decorators/-/babel-plugin-syntax-decorators-6.13.0.tgz#312563b4dbde3cc806cee3e416cceeaddd11ac0b"
+
+babel-plugin-syntax-dynamic-import@^6.18.0:
+  version "6.18.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-syntax-dynamic-import/-/babel-plugin-syntax-dynamic-import-6.18.0.tgz#8d6a26229c83745a9982a441051572caa179b1da"
 
 babel-plugin-syntax-exponentiation-operator@^6.8.0:
   version "6.13.0"
@@ -967,6 +977,42 @@ babel-preset-react-native@^2.0.0, babel-preset-react-native@^2.1.0:
     babel-plugin-transform-react-jsx "^6.5.0"
     babel-plugin-transform-react-jsx-source "^6.5.0"
     babel-plugin-transform-regenerator "^6.5.0"
+    react-transform-hmr "^1.0.4"
+
+babel-preset-react-native@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-react-native/-/babel-preset-react-native-4.0.0.tgz#3df80dd33a453888cdd33bdb87224d17a5d73959"
+  dependencies:
+    babel-plugin-check-es2015-constants "^6.5.0"
+    babel-plugin-react-transform "^3.0.0"
+    babel-plugin-syntax-async-functions "^6.5.0"
+    babel-plugin-syntax-class-properties "^6.5.0"
+    babel-plugin-syntax-dynamic-import "^6.18.0"
+    babel-plugin-syntax-flow "^6.5.0"
+    babel-plugin-syntax-jsx "^6.5.0"
+    babel-plugin-syntax-trailing-function-commas "^6.5.0"
+    babel-plugin-transform-class-properties "^6.5.0"
+    babel-plugin-transform-es2015-arrow-functions "^6.5.0"
+    babel-plugin-transform-es2015-block-scoping "^6.5.0"
+    babel-plugin-transform-es2015-classes "^6.5.0"
+    babel-plugin-transform-es2015-computed-properties "^6.5.0"
+    babel-plugin-transform-es2015-destructuring "^6.5.0"
+    babel-plugin-transform-es2015-for-of "^6.5.0"
+    babel-plugin-transform-es2015-function-name "^6.5.0"
+    babel-plugin-transform-es2015-literals "^6.5.0"
+    babel-plugin-transform-es2015-modules-commonjs "^6.5.0"
+    babel-plugin-transform-es2015-parameters "^6.5.0"
+    babel-plugin-transform-es2015-shorthand-properties "^6.5.0"
+    babel-plugin-transform-es2015-spread "^6.5.0"
+    babel-plugin-transform-es2015-template-literals "^6.5.0"
+    babel-plugin-transform-flow-strip-types "^6.5.0"
+    babel-plugin-transform-object-assign "^6.5.0"
+    babel-plugin-transform-object-rest-spread "^6.5.0"
+    babel-plugin-transform-react-display-name "^6.5.0"
+    babel-plugin-transform-react-jsx "^6.5.0"
+    babel-plugin-transform-react-jsx-source "^6.5.0"
+    babel-plugin-transform-regenerator "^6.5.0"
+    babel-template "^6.24.1"
     react-transform-hmr "^1.0.4"
 
 babel-register@^6.24.1, babel-register@^6.26.0:
@@ -1633,6 +1679,10 @@ csurf@~1.8.3:
     csrf "~3.0.0"
     http-errors "~1.3.1"
 
+cubic-bezier@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/cubic-bezier/-/cubic-bezier-0.1.2.tgz#d4970942002e45372e0aa92db657e39eaf6824d7"
+
 dashdash@^1.12.0:
   version "1.14.1"
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
@@ -1900,18 +1950,19 @@ enzyme-to-json@^3.2.2:
     lodash "^4.17.4"
 
 enzyme@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-3.1.1.tgz#c6948dfccd055d75fbd8627ad1c96a024d0e247b"
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/enzyme/-/enzyme-3.2.0.tgz#998bdcda0fc71b8764a0017f7cc692c943f54a7a"
   dependencies:
     cheerio "^1.0.0-rc.2"
     function.prototype.name "^1.0.3"
+    has "^1.0.1"
     is-subset "^0.1.1"
     lodash "^4.17.4"
     object-is "^1.0.1"
     object.assign "^4.0.4"
     object.entries "^1.0.4"
     object.values "^1.0.4"
-    raf "^3.3.2"
+    raf "^3.4.0"
     rst-selector-parser "^2.2.3"
 
 errno@^0.1.4:
@@ -2865,7 +2916,7 @@ instapromise@^2.0.7:
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/instapromise/-/instapromise-2.0.7.tgz#85e66b31021194da11214c865127ef04ec30167a"
 
-invariant@^2.0.0, invariant@^2.2.2:
+invariant@^2.0.0, invariant@^2.2.1, invariant@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.2.tgz#9e1f56ac0acdb6bf303306f338be3b204ae60360"
   dependencies:
@@ -3760,6 +3811,10 @@ jws@^3.1.4:
     base64url "^2.0.0"
     jwa "^1.1.4"
     safe-buffer "^5.0.1"
+
+keymirror@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
 
 kind-of@^3.0.2:
   version "3.2.2"
@@ -4916,7 +4971,7 @@ querystring@0.2.0, querystring@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-raf@^3.3.2:
+raf@^3.2.0, raf@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
   dependencies:
@@ -4992,6 +5047,39 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-create-fragment@^15.4.0:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-addons-create-fragment/-/react-addons-create-fragment-15.6.2.tgz#a394de7c2c7becd6b5475ba1b97ac472ce7c74f8"
+  dependencies:
+    fbjs "^0.8.4"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.0"
+
+react-addons-perf@^15.4.0:
+  version "15.4.2"
+  resolved "https://registry.yarnpkg.com/react-addons-perf/-/react-addons-perf-15.4.2.tgz#110bdcf5c459c4f77cb85ed634bcd3397536383b"
+  dependencies:
+    fbjs "^0.8.4"
+    object-assign "^4.1.0"
+
+react-addons-pure-render-mixin@^15.4.0:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-addons-pure-render-mixin/-/react-addons-pure-render-mixin-15.6.2.tgz#6b83f40b6b36ee40735cbd6125eb3f13ce1cddc9"
+  dependencies:
+    fbjs "^0.8.4"
+    object-assign "^4.1.0"
+
+react-addons-test-utils@^15.4.0:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
+
+react-addons-update@^15.4.0:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-addons-update/-/react-addons-update-15.6.2.tgz#e53753c5b34887974510c882d7fb075851d5e504"
+  dependencies:
+    fbjs "^0.8.9"
+    object-assign "^4.1.0"
+
 react-clone-referenced-element@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/react-clone-referenced-element/-/react-clone-referenced-element-1.0.1.tgz#2bba8c69404c5e4a944398600bcc4c941f860682"
@@ -5006,6 +5094,15 @@ react-devtools-core@^2.5.0:
   dependencies:
     shell-quote "^1.6.1"
     ws "^2.0.3"
+
+react-dom@^15.4.0:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.2.tgz#41cfadf693b757faf2708443a1d1fd5a02bef730"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.0"
+    prop-types "^15.5.10"
 
 react-dom@^16.1.1:
   version "16.1.1"
@@ -5045,6 +5142,23 @@ react-native-gesture-handler@1.0.0-alpha.28:
 react-native-maps@0.17.0:
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.17.0.tgz#d10fa94a049432c46b6ee03fe9db84c83da65c8b"
+
+react-native-mock@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-mock/-/react-native-mock-0.3.1.tgz#13d22433c5351a8a7fb8aedd7862b614d087851c"
+  dependencies:
+    cubic-bezier "^0.1.2"
+    invariant "^2.2.1"
+    keymirror "^0.1.1"
+    raf "^3.2.0"
+    react-addons-create-fragment "^15.4.0"
+    react-addons-perf "^15.4.0"
+    react-addons-pure-render-mixin "^15.4.0"
+    react-addons-test-utils "^15.4.0"
+    react-addons-update "^15.4.0"
+    react-dom "^15.4.0"
+    react-timer-mixin "^0.13.3"
+    warning "^2.1.0"
 
 react-native-safe-module@^1.1.0:
   version "1.2.0"
@@ -5186,7 +5300,7 @@ react-test-renderer@16.0.0-beta.5:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
 
-react-test-renderer@^16.0.0-0:
+react-test-renderer@^16.0.0-0, react-test-renderer@^16.1.1:
   version "16.1.1"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.1.1.tgz#a05184688d564be799f212449262525d1e350537"
   dependencies:
@@ -5201,7 +5315,7 @@ react-test-utils@^0.0.1:
     envify "~0.2.0"
     react "~0.8.0"
 
-react-timer-mixin@^0.13.2:
+react-timer-mixin@^0.13.2, react-timer-mixin@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.3.tgz#0da8b9f807ec07dc3e854d082c737c65605b3d22"
 
@@ -6360,6 +6474,12 @@ walker@~1.0.5:
   resolved "https://registry.yarnpkg.com/walker/-/walker-1.0.7.tgz#2f7f9b8fd10d677262b18a884e28d19618e028fb"
   dependencies:
     makeerror "1.0.x"
+
+warning@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/warning/-/warning-2.1.0.tgz#21220d9c63afc77a8c92111e011af705ce0c6901"
+  dependencies:
+    loose-envify "^1.0.0"
 
 watch@~0.10.0:
   version "0.10.0"
