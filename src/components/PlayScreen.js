@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { testAction } from '../actions/testAction'
+import TextEditor  from './TextEditor'
 
 class PlayScreen extends Component {
 	constructor(props) {
@@ -14,12 +15,7 @@ class PlayScreen extends Component {
 	}
 	
 	render() {
-		return(
-			<View style={{ paddingTop: 50 }}>
-				<Text>{this.props.test}</Text>
-				<Button title="some shit" onPress={this.pressHandler}></Button>
-			</View>
-		)
+		return(<TextEditor test={this.props.test} pressHandler={this.pressHandler} />)
 	}
 }
 

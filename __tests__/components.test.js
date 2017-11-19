@@ -4,13 +4,8 @@ import { Text } from 'react-native'
 import Enzyme, { shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import TextEditor from '../src/components/TextEditor'
-
-Enzyme.configure({ adapter: new Adapter() })
-
-//Fix this mess
-
-// Note: test renderer must be required after react-native.
 import renderer from 'react-test-renderer';
+Enzyme.configure({ adapter: new Adapter() })
 
 test('renders correctly', () => {
   const tree = renderer.create(
