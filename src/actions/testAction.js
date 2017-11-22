@@ -1,3 +1,3 @@
 export const testAction = () => {
-	return { type: 'test', payload: 'test this shit' }
+	return { type: 'test', payload: 'changed' }
 }
