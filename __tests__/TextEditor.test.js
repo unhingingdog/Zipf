@@ -1,7 +1,7 @@
 import '../jestUtils'
 import TextEditor from '../src/components/TextEditor'
 
-describe('ReactNativeTesting', () => {
+describe('TextEdior Component', () => {
   let component
   let Button
 	let Text
@@ -11,21 +11,22 @@ describe('ReactNativeTesting', () => {
 		onPress = jest.fn()
     component = shallow(<TextEditor test="initial" pressHandler={onPress} />);
     Button = component.find('Button')
-		Text = component.find('Text')
+		Input = component.find('TextInput')
   });
 
-  it('has has button text', () => {
+  it('has a button with a title', () => {
     expect(Button.props().title).toEqual('some shit')
   });
 	
-	it('has initial text', () => {
-		expect(Text.props().children).toEqual('initial')
+	it('has no text in the input when it loads', () => {
+		expect(!!Input.props().value).toEqual(false)
 	})
 	
-	it('changes the text when the button is pressed', () => {
-		Button.simulate('press')
-		expect(onPress).toHaveBeenCalled()
-		//expect(Text.props().children).equal('changed')
+	describe('TextEditor interactions', () => {
+		it('changes the text when the button is pressed', () => {
+			Button.simulate('press')
+			expect(onPress).toHaveBeenCalled()
+		})
 	})
 })
 

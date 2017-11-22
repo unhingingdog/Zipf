@@ -1,9 +1,12 @@
-import { testAction } from '../src/actions/testAction'
+import { 
+	TextChangedAction
+} from '../src/actions/TextChangedAction'
 //import types
 
 describe('actions', () => {
-	it('should create a test action to fire textReducer', () => {
-		const expectedAction = { type: 'test', payload: 'changed' }
-		expect(testAction('test')).toEqual(expectedAction)
+	it('should call TextChange when text is changed', () => {
+		const expectedAction = { type: 'TextChange', payload: 'test' }
+		expect(TextChangedAction('test'))
+			.toEqual(expectedAction)
 	})
 })

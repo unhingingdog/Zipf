@@ -1,15 +1,15 @@
-import reducers, { textReducer } from '../src/reducers'
+import reducers, { TextReducer } from '../src/reducers'
 //import types
 
-describe('textReducer', () => {
+describe('TextReducer', () => {
 	it('has a default state', () => {
 		expect(reducers(undefined, {}))
-			.toEqual({ textReducer: { test: 'Hello?' }})
+			.toEqual({ TextReducer: { text: '' }})
 	})
 	
-	it('changes when passed test action', () => {
-		expect(reducers(undefined, { type: 'test', payload: 'testtest'}))
-			.toEqual({ textReducer: { test: 'testtest' }})
+	it('changes text state when text is edited', () => {
+		expect(reducers(undefined, { type: 'TextChange', payload: 'testtest' }))
+			.toEqual({ TextReducer: { text: 'testtest' }})
 	})
 })
 	

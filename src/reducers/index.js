@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux'
-import textReducer from './textReducer'
-import playReducer from './playReducer'
+import TextReducer from './TextReducer'
 
 export default combineReducers({
-	textReducer
+	TextReducer
 })

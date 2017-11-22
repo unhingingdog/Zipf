@@ -1,21 +1,10 @@
-const initial_state = { test: 'Hello?' }
+const initial_state = { text: '' }
 
 export default (state = initial_state, action) => {
 	switch(action.type) {
-		case 'test':
-			return { ...state, test: action.payload }
+		case 'TextChange':
+			return { ...state, text: action.payload }
 		default:
 			return state
 	}
 }
-
-//initial_state = { test: "testreducer"}
-//
-//export default (state = initial_state, action) => {
-//	switch(action.type) {
-//		case 'select_library':
-//			return action.payload
-//		default:
-//			return state	
-//	}
-//}
