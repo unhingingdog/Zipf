@@ -10,7 +10,7 @@ export default class TextEditor extends Component {
 					value={this.props.textValue}
 					onChangeText={this.props.textChange}
 				/>
-				<Button title="Paste" onPress={this.props.pressHandler}></Button>
+				<Button title="Paste" onPress={this.props.pasteWithButton}></Button>
 			</View>
 		)
 	}
