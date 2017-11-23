@@ -15,7 +15,7 @@ describe('TextEdior Component', () => {
   });
 
   it('has a button with a title', () => {
-    expect(Button.props().title).toEqual('some shit')
+    expect(Button.props().title).toEqual('Paste')
   });
 	
 	it('has no text in the input when it loads', () => {
