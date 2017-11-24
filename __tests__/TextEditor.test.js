@@ -1,29 +1,33 @@
 import '../jestUtils'
 import TextEditor from '../src/components/TextEditor'
 
-describe('TextEdior Component', () => {
+describe('TextEditor Component', () => {
   let component
   let Button
 	let Text
+	let Input
 	let onPress
+	let onTextEntry
 
   beforeEach(() => {
 		onPress = jest.fn()
-    component = shallow(<TextEditor test="initial" pressHandler={onPress} />);
+		onTextEntry = jest.fn()
+    component = shallow(
+			<TextEditor 
+				textChange={onTextEntry}
+				pasteWithButton={onPress}
+			/>
+		)
     Button = component.find('Button')
-		Input = component.find('TextInput')
-  });
+		Input = component.find('TextField')
+  })
 
   it('has a button with a title', () => {
     expect(Button.props().title).toEqual('Paste')
   });
 	
-	it('has no text in the input when it loads', () => {
-		expect(!!Input.props().value).toEqual(false)
-	})
-	
 	describe('TextEditor interactions', () => {
-		it('changes the text when the button is pressed', () => {
+		it('the paste button responds to press', () => {
 			Button.simulate('press')
 			expect(onPress).toHaveBeenCalled()
 		})

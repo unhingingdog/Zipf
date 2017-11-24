@@ -1,34 +1,30 @@
 import React, { Component } from 'react'
-import { Text, View, Button, TextInput } from 'react-native'
+import { Text, View, Button, TextInput, Keyboard } from 'react-native'
+import TextField from './TextField'
 
 export default class TextEditor extends Component {
 	render() {
 		return (
 			<View style={ styles.containerStyle }>
-				<TextInput 
-					style={styles.inputStyle}
-					value={this.props.textValue}
-					onChangeText={this.props.textChange}
+				<TextField 
+					textValue={this.props.textValue} 
+					textChange={this.props.textChange} 
 				/>
-				<Button title="Paste" onPress={this.props.pasteWithButton}></Button>
+				<Button 
+					title="Paste" 
+					onPress={this.props.pasteWithButton}
+				></Button>
 			</View>
 		)
 	}
 }
 
 const styles = {
-	inputStyle: {
-		color: 'black',
-		paddingRight: 5,
-		paddingLeft: 5,
-		fontSize: 18,
-		lineHeight: 23,
-		flex: 3
-	},
 	containerStyle: {
-		height: 40,
+		height: 60,
 		flex: 1,
-		flexDirection: 'row',
-		alignItems: 'center'
+		flexDirection: 'column',
+		justifyContent: 'center',
+		backgroundColor: 'black'
 	}
 }

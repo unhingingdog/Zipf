@@ -13,13 +13,11 @@ class MainScreen extends Component {
 	
 	changeTextHandler(text) {
 		this.props.TextChangedAction(text)
-		console.log(this.props.text)
 	}
 	
-	pasteButtonHandler() {
-		const { TextChangedAction } = this.props
-		Clipboard.getString()
-			.then( content => TextChangedAction(content) )
+	async pasteButtonHandler() {
+		const content = await Clipboard.getString()
+		this.props.TextChangedAction(content)
 	}
 	
 	render() {
