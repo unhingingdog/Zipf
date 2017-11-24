@@ -4,7 +4,7 @@ import { TextInput, Keyboard } from 'react-native'
 const TextEditor = (props) => { 
 	return(
 		<TextInput 
-			style={styles.inputStyle}
+			style={props.inputStyle}
 			value={props.textValue}
 			onChangeText={props.textChange}
 			multiline={true}
@@ -19,17 +19,7 @@ const TextEditor = (props) => {
 }
 
 	styles = {
-		inputStyle: {
-			color: 'black',
-			paddingRight: 5,
-			paddingLeft: 5,
-			fontSize: 18,
-			lineHeight: 23,
-			flex: 3,
-			backgroundColor: 'white',
-			margin: 10,
-			borderRadius: 5
-		}
+
 	}
 
 export default TextEditor
