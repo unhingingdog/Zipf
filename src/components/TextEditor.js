@@ -4,6 +4,7 @@ import TextField from './TextField'
 
 export default class TextEditor extends Component {
 	render() {
+		console.log('button mode', this.props.buttonMode)
 		return (
 			<View style={styles.containerStyle}>
 				<TextField 
@@ -12,7 +13,7 @@ export default class TextEditor extends Component {
 					inputStyle={styles.inputStyle}
 				/>
 				<Button 
-					title="Paste" 
+					title={this.props.buttonMode}
 					onPress={this.props.pasteWithButton}
 					style={styles.buttonStyle}
 				></Button>
@@ -23,7 +24,7 @@ export default class TextEditor extends Component {
 
 const styles = {
 	containerStyle: {
-		flex: 2,
+		flex: 1,
 		flexDirection: 'column',
 		justifyContent: 'center',
 		backgroundColor: 'black'

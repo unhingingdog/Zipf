@@ -8,6 +8,7 @@ describe('TextField Component', () => {
 	let Input
 	let onPress
 	let onTextEntry
+	let fieldContent
 
   beforeEach(() => {
 		onTextEntry = jest.fn()
@@ -24,6 +25,8 @@ describe('TextField Component', () => {
 		Input.simulate('focus')
 		Input.simulate('ChangeText', 'Changed')
 		expect(onTextEntry).toHaveBeenCalledWith('Changed')
+		console.log(component.fieldContent)
 	})
+	
 	
 })
