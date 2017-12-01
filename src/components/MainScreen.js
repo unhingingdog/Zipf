@@ -12,6 +12,10 @@ class MainScreen extends Component {
 		this.pasteButtonHandler = this.pasteButtonHandler.bind(this)
 	}
 	
+	static navigationOptions = {
+		header: null
+	}
+	
 	changeTextHandler(text) {
 		this.props.TextChangedAction(text)
 	}
