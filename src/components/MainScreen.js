@@ -23,11 +23,10 @@ class MainScreen extends Component {
 	async pasteButtonHandler() {
 		const content = await Clipboard.getString()
 		this.props.TextChangedAction(content)
-		this.props.FlipButtonAction()
+		this.props.FlipButtonAction(this.props.navigation.navigate)
 	}
 	
 	render() {
-		console.log('from main', this.props.buttonMode)
 		return(
 			<TextEditor 
 				buttonMode={this.props.buttonMode}
@@ -42,7 +41,8 @@ class MainScreen extends Component {
 const mapStateToProps = state => {
  return	{ 
 		text: state.textInput.text,
-	 	buttonMode: state.buttonMode.buttonMode
+	 	buttonMode: state.buttonMode.buttonMode,
+	 	navState: state.navigation
  	}
 }
 

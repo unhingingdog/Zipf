@@ -4,7 +4,15 @@ import { Reducer } from 'redux-testkit'
 
 const initial_state = {
 	buttonMode: {buttonMode: "Paste"}, 
-	textInput: { text: '' }
+	textInput: { text: '' },
+	navigation: {
+		index: 0,
+		routes: [{
+			key: "Init-id-1512108000143-0", 
+			routeName: "MainScreen", 
+			type: undefined
+		}]
+	}
 }
 
 describe('TextReducer reducer', () => {

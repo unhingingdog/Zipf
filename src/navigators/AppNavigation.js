@@ -14,6 +14,7 @@ export const NavStack = StackNavigator(routeConfigs)
 class AppNavigation extends Component {
 	render() {
 		const { navState, dispatch } = this.props
+		console.log(dispatch)
 		return(
 		 <NavStack 
 				navigation={addNavigationHelpers({ dispatch, state: navState })}
@@ -22,9 +23,12 @@ class AppNavigation extends Component {
 	}
 }
 
+mapDispatchToProps = dispatch => {
+	return { dispatch }
+}
+
 const mapStateToProps = state => {
-	console.log(state)
 	return { navState: state.navigation }
 }
 
-export default connect(mapStateToProps, {})(AppNavigation)
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavigation)
