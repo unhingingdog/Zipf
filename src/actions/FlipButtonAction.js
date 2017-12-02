@@ -1,7 +1,7 @@
 import { NavStack } from '../navigators/AppNavigation'
 import { navigateToScreen } from './actionHelpers'
 
-export const FlipButtonAction = (navigate) => {
-	navigate('PlayScreen', { screen: 'PlayScreen' })
+export const FlipButtonAction = (dispatch) => {
+	navigateToScreen(dispatch, 'PlayScreen')
 	return { type: 'FlipButton' }
 }
