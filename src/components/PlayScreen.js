@@ -5,12 +5,14 @@ import { connect } from 'react-redux'
 
 class PlayScreen extends Component {
 	render() {
-		return <Text>Shitbar</Text>
+		return <Text>{this.props.text}</Text>
 	}
 }
 
 const mapStateToProps = state => {
-	return{}
+	return {
+		text: state.textInput.text
+	}
 }
 
 export default connect(mapStateToProps, {})(PlayScreen)

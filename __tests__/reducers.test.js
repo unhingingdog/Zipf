@@ -5,39 +5,32 @@ import { Reducer } from 'redux-testkit'
 const initial_state = {
 	buttonMode: {buttonMode: "Paste"}, 
 	textInput: { text: '' },
-	navigation: {
-		index: 0,
-		routes: [{
-			key: "Init-id-1512108000143-0", 
-			routeName: "MainScreen", 
-			type: undefined
-		}]
-	}
+	navigation: {}
 }
 
 describe('TextReducer reducer', () => {
-	it('has a default state', () => {
-		expect(reducers(undefined, {})).toEqual(initial_state)
+	
+	it('has a default state', () => {		
+		const action = {}
+		let test_state = reducers(undefined, action)
+		test_state.navigation = {}
+		expect(test_state).toEqual(initial_state)
 	})
 	
 	it('changes text state when called', () => {
 		const action = { type: 'TextChange', payload: 'testtest' }
-		
-		expect(reducers(undefined, action))
-			.toEqual({ ...initial_state, textInput: { text: 'testtest' }})
+		let test_state = reducers(undefined, action)
+		test_state.navigation = {}
+		expect(test_state).toEqual({ ...initial_state, textInput: { text: "testtest" }})
 	})
 })
 
 describe('FlipButton reducer', () => {
-	const action = { type: 'FlipButton' }
-	
-	it('has a default state', () => {
-		expect(reducers(undefined, {})).toEqual(initial_state)
-	})
-	
 	it('Flips button state when called', () => {
-		expect(reducers(undefined, action))
-			.toEqual({ ...initial_state, buttonMode: { buttonMode: 'Read' } })
+		const action = { type: 'FlipButton' }
+		let test_state = reducers(undefined, action)
+		test_state.navigation = {}
+		expect(test_state).toEqual({ ...initial_state, buttonMode: { buttonMode: 'Read' } })
 	})
 })
 	

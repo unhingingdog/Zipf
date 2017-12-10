@@ -3,6 +3,8 @@ import { Text, View, Button, TextInput, Keyboard } from 'react-native'
 import TextField from './TextField'
 
 export default class TextEditor extends Component {
+	
+	
 	render() {
 		console.log('button mode', this.props.buttonMode)
 		return (

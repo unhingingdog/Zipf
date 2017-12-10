@@ -36,7 +36,7 @@
   },
   "jest": {
     "preset": "react-native",
-		"transformIgnorePatterns": [
+    "transformIgnorePatterns": [
       "node_modules/(?!(jest-)?react-native|react-navigation)"
     ]
   },

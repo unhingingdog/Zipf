@@ -23,8 +23,11 @@ class MainScreen extends Component {
 	async pasteButtonHandler() {
 		const content = await Clipboard.getString()
 		this.props.TextChangedAction(content)
-		this.props.FlipButtonAction(this.props.navigation.dispatch)
+		const { dispatch } = this.props.navigation
+		this.props.FlipButtonAction(dispatch)
 	}
+
+	
 	
 	render() {
 		return(

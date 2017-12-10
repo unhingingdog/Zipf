@@ -1,4 +1,3 @@
-import { NavStack } from '../navigators/AppNavigation'
 import { navigateToScreen } from './actionHelpers'
 
 export const FlipButtonAction = (dispatch) => {
