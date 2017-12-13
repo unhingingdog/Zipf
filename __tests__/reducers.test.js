@@ -3,12 +3,11 @@ import { Reducer } from 'redux-testkit'
 //import types
 
 const initial_state = {
-	buttonMode: {buttonMode: "Paste"}, 
 	textInput: { text: '' },
 	navigation: {}
 }
 
-describe('TextReducer reducer', () => {
+describe('TextReducer', () => {
 	
 	it('has a default state', () => {		
 		const action = {}
@@ -22,15 +21,6 @@ describe('TextReducer reducer', () => {
 		let test_state = reducers(undefined, action)
 		test_state.navigation = {}
 		expect(test_state).toEqual({ ...initial_state, textInput: { text: "testtest" }})
-	})
-})
-
-describe('FlipButton reducer', () => {
-	it('Flips button state when called', () => {
-		const action = { type: 'FlipButton' }
-		let test_state = reducers(undefined, action)
-		test_state.navigation = {}
-		expect(test_state).toEqual({ ...initial_state, buttonMode: { buttonMode: 'Read' } })
 	})
 })
 	
