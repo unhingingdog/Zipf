@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Button, Clipboard } from 'react-native'
 import { connect } from 'react-redux'
 import { TextChangedAction } from '../actions/TextChangedAction'
-import { FlipButtonAction } from '../actions/FlipButtonAction'
+import { SubmitTextAction } from '../actions/SubmitTextAction'
 import TextEditor  from './TextEditor'
 
 class MainScreen extends Component {
@@ -20,14 +20,9 @@ class MainScreen extends Component {
 		this.props.TextChangedAction(text)
 	}
 	
-	async pasteButtonHandler() {
-		const content = await Clipboard.getString()
-		this.props.TextChangedAction(content)
-		const { dispatch } = this.props.navigation
-		this.props.FlipButtonAction(dispatch)
+	pasteButtonHandler() {
+		this.props.SubmitTextAction(this.props.navigation.dispatch)
 	}
-
-	
 	
 	render() {
 		return(
@@ -44,12 +39,11 @@ class MainScreen extends Component {
 const mapStateToProps = state => {
  return	{ 
 		text: state.textInput.text,
-	 	buttonMode: state.buttonMode.buttonMode,
 	 	navState: state.navigation
  	}
 }
 
 export default connect(mapStateToProps, {
 	TextChangedAction,
-	FlipButtonAction
+	SubmitTextAction
 })(MainScreen)

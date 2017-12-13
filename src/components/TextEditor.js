@@ -15,7 +15,7 @@ export default class TextEditor extends Component {
 					inputStyle={styles.inputStyle}
 				/>
 				<Button 
-					title={this.props.buttonMode}
+					title="Paste"
 					onPress={this.props.pasteWithButton}
 					style={styles.buttonStyle}
 				></Button>

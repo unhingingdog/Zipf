@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { View, Text } from 'react-native'
 import { StackNavigator, addNavigationHelpers } from 'react-navigation'
 import { connect } from 'react-redux'
 import MainScreen from '../components/MainScreen'
@@ -14,7 +15,6 @@ export const NavStack = StackNavigator(routeConfigs)
 class AppNavigation extends Component {
 	render() {
 		const { navState, dispatch } = this.props
-		console.log(dispatch)
 		return(
 		 <NavStack 
 				navigation={addNavigationHelpers({ dispatch, state: navState })}
