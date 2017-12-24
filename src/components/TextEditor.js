@@ -6,7 +6,6 @@ export default class TextEditor extends Component {
 	
 	
 	render() {
-		console.log('button mode', this.props.buttonMode)
 		return (
 			<View style={styles.containerStyle}>
 				<TextField 

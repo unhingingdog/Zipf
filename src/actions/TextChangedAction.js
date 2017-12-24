@@ -1,3 +1,5 @@
+import { TEXT_CHANGE } from './types'
+
 export const TextChangedAction = (text) => {
-	return { type: 'TextChange', payload: text }
+	return { type: TEXT_CHANGE, payload: text }
 }
