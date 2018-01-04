@@ -4,25 +4,31 @@ import Word from './Word'
 import textEngine from '../textEngine'
 import Redux from 'redux'
 import { connect } from 'react-redux'
-import { PlayAction } from '../actions/PlayAction'
+import { PlayAction, IncrementAction } from '../actions/PlayAction'
 
 class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
 		this.playPressHandler = this.playPressHandler.bind(this)
+		this.incrementHandler = this.incrementHandler.bind(this)
 	}
 	
 	playPressHandler() {
 		this.props.PlayAction()
-		console.log(this.props.playing)
+	}
+	
+	incrementHandler() {
+		this.props.IncrementAction()
+		console.log("Incremented")
 	}
 	
 	render() {
 		let { text, place } = this.props
-		let word = textEngine(text, place)
+		let word = text.split(' ')[place]
 		return(
 			<View>
-				<Word>{word}</Word>
+				<Button title="Increment" onPress={this.incrementHandler}></Button>
+				<Text>{word}</Text>
 				<Button title="play" onPress={this.playPressHandler}></Button>
 			</View>
 		)
@@ -37,4 +43,7 @@ const mapStateToProps = state => {
 	}
 }
 
-export default connect(mapStateToProps, { PlayAction })(PlayScreen)
+export default connect(mapStateToProps, { 
+	PlayAction,
+	IncrementAction
+})(PlayScreen)
