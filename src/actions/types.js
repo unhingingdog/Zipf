@@ -1,2 +1,6 @@
-export const TEXT_CHANGE = 'TextChange'
-export const PLAY = 'Play'
+export const TEXT_CHANGE = 'textChange'
+export const PLAY = 'play'
+export const INCREMENT = 'increment'
+export const DECREMENT = 'decrement'
+export const PAUSE = 'pause'
+export const STOP = 'stop'

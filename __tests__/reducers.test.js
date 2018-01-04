@@ -1,13 +1,17 @@
 import reducers, { TextReducer } from '../src/reducers'
 import { Reducer } from 'redux-testkit'
-import { TEXT_CHANGE, PLAY } from '../src/actions/types'
+import { TEXT_CHANGE, 
+				 PLAY,
+			   INCREMENT,
+			 	 DECREMENT
+} from '../src/actions/types'
 
 const initial_state = {
 	textInput: { text: '' },
 	navigation: {},
 	play: {
 		playing: false,
-		bookmark: 0
+		place: 0
 	}
 }
 
@@ -32,7 +36,19 @@ describe('PlayReducer', () => {
 		const action = { type: PLAY }
 		let test_state = reducers(undefined, action)
 		test_state.navigation = {}
-		expect(test_state).toEqual({ ...initial_state, play: { playing: true, bookmark: 0 }})
+		expect(test_state).toEqual({ ...initial_state, play: { playing: true, place: 0 }})
+	})
+	it('Increments place', () => {
+		const action = { type: INCREMENT }
+		let test_state = reducers(undefined, action)
+		test_state.navigation = {}
+		expect(test_state).toEqual({ ...initial_state, play: { playing: false, place: 1 }})
+	})
+	it('Decrements place', () => {
+		const action = { type: DECREMENT }
+		let test_state = reducers(undefined, action)
+		test_state.navigation = {}
+		expect(test_state).toEqual({ ...initial_state, play: { playing: false, place: -1 }})
 	})
 })
 	

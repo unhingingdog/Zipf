@@ -1,6 +1,13 @@
 import { TextChangedAction } from '../src/actions/TextChangedAction'
-import { PlayAction } from '../src/actions/PlayAction'
-import { TEXT_CHANGE, PLAY } from '../src/actions/types'
+import { PlayAction, 
+				 IncrementAction, 
+				 DecrementAction } 
+from '../src/actions/PlayAction'
+import { TEXT_CHANGE, 
+				 PLAY, 
+				 INCREMENT, 
+				 DECREMENT } 
+from '../src/actions/types'
 
 describe('actions', () => {
 	it('should call TextChange', () => {
@@ -10,5 +17,13 @@ describe('actions', () => {
 	it('should call Play', () => {
 		const expectedAction = { type: PLAY }
 		expect(PlayAction()).toEqual(expectedAction)
+	})
+	it('should call increment', () => {
+		const expectedAction = { type: INCREMENT }
+		expect(IncrementAction()).toEqual(expectedAction)
+	})
+		it('should call increment', () => {
+		const expectedAction = { type: DECREMENT }
+		expect(DecrementAction()).toEqual(expectedAction)
 	})
 })
