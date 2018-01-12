@@ -13,8 +13,8 @@ describe('TextField Component', () => {
   beforeEach(() => {
 		onTextEntry = jest.fn()
     component = shallow(
-			<TextField 
-				textValue={"test test"} 
+			<TextField
+				textValue={"test test"}
 				textChange={onTextEntry}
 			/>
 		)
@@ -25,8 +25,7 @@ describe('TextField Component', () => {
 		Input.simulate('focus')
 		Input.simulate('ChangeText', 'Changed')
 		expect(onTextEntry).toHaveBeenCalledWith('Changed')
-		console.log(component.fieldContent)
 	})
-	
-	
+
+
 })

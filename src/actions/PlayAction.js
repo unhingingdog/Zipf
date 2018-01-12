@@ -1,7 +1,20 @@
-import { PLAY, INCREMENT, DECREMENT } from './types'
+import { PLAY,
+				 INCREMENT,
+				 DECREMENT,
+				 PAUSE,
+				 STOP
+			 } from './types'
 
 export const PlayAction = () => {
 	return { type: PLAY }
+}
+
+export const PauseAction = () => {
+	return { type: PAUSE }
+}
+
+export const StopAction = () => {
+	return { type: STOP }
 }
 
 export const IncrementAction = () => {
