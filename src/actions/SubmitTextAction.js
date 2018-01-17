@@ -7,7 +7,7 @@ import { Clipboard } from 'react-native'
 export const SubmitTextAction = (dispatch) => {
 	return (dispatch) => {
 		Clipboard.getString()
-			.then(content => { 
+			.then(content => {
 				dispatch(TextChangedAction(content))
 				navigateToScreen(dispatch, 'PlayScreen')
 			})

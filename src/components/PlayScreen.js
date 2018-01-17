@@ -18,16 +18,22 @@ class PlayScreen extends Component {
 
 	incrementHandler() {
 		this.props.IncrementAction()
-		console.log("Incremented")
+	}
+
+	componentWillMount() {
+		
+	}
+
+	componentDidMount() {
+		//call increment after state.word
 	}
 
 	render() {
-		let { text, place } = this.props
-		let word = text.split(' ')[place]
+
 		return(
 			<View>
 				<Button title="Increment" onPress={this.incrementHandler}></Button>
-				<Text>{word}</Text>
+				<Text>Placeholder</Text>
 				<Button title="play" onPress={this.playPressHandler}></Button>
 			</View>
 		)
