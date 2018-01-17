@@ -33,8 +33,10 @@ export default textEngine = (text, readingSpeed) => {
 			{word, displayTime: weightTotal(word, 1)}
 		))
 
-		const error = new Error('Text engine failed to return a feed.')
-		typeof feed[splitText.length - 1].displayTime === 'number'  ?
-			resolve(feed) : reject(error)
+		const error = new Error(['Text engine failed to return the correct feed.'])
+		const verifyWord = feed[splitText.length - 1]
+
+		typeof verifyWord.displayTime === 'number' &&
+			verifyWord === feed[feed.length - 1] ? resolve(feed) : reject(error)
 	})
 }
