@@ -5,16 +5,14 @@ import thunk from 'redux-thunk'
 import { Clipboard } from 'react-native'
 import weightEngine from '../engine'
 
-export const SubmitTextAction = (dispatch) => {
-	return (dispatch) => {
-		Clipboard.getString()
-			.then(content => engine(content, 1))
-			.then(feed => {
-				dispatch(//TextSubmittedAction(content)) //places content in feed state
-				navigateToScreen(dispatch, 'PlayScreen')
-			})
-			.catch(error => console.log(error))
-		}
-}
+import { SUBMIT_TEXT, TEXT_CHANGE } from './types'
+const default_speed = 1
 
-//remove hardcoded speed
+export const SubmitTextAction = () => {
+	return async dispatch => {
+		const content = await Clipboard.getString()
+		const payload = await weightEngine(content, default_speed)
+		dispatch({ type: SUBMIT_TEXT, payload })
+		navigateToScreen(dispatch, 'PlayScreen')
+	}
+}
