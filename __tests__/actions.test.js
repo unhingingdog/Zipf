@@ -1,5 +1,4 @@
 import { TextChangedAction } from '../src/actions/TextChangedAction'
-import { SubmitTextAction } from '../src/actions/SubmitTextAction'
 import { PlayAction,
 				 PauseAction,
 				 StopAction,
@@ -21,11 +20,6 @@ describe('actions', () => {
 	it('should call TextChange', () => {
 		const expectedAction = { type: TEXT_CHANGE, payload: 'test' }
 		expect(TextChangedAction('test')).toEqual(expectedAction)
-	})
-
-	it('should call SubmitText', () => {
-		const expectedAction = { type: SUBMIT_TEXT, payload: 'test it' }
-		expect(SubmitTextAction('test it')).toEqual(expectedAction)
 	})
 
 	it('should call Play', () => {
