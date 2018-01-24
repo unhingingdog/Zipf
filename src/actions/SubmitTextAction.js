@@ -8,11 +8,10 @@ import weightEngine from '../engine'
 import { SUBMIT_TEXT, TEXT_CHANGE } from './types'
 const default_speed = 1
 //inject Clipboard so it can be mocked
-const clipBoard = Clipboard
 
-export const SubmitTextAction = (clipboard = clipboard) => {
+export const SubmitTextAction = (dispatch,clipboard = Clipboard) => {
 	return async dispatch => {
-		const content = await clipBoard.getString()
+		const content = await clipboard.getString()
 		const payload = await weightEngine(content, default_speed)
 		dispatch({ type: SUBMIT_TEXT, payload })
 		navigateToScreen(dispatch, 'PlayScreen')

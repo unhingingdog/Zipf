@@ -4,28 +4,39 @@ import { weightTotal } from '../src/engine'
 import { SubmitTextAction } from '../src/actions/SubmitTextAction'
 import { SUBMIT_TEXT } from '../src/actions/types'
 
-const Clipboard = {
-  getString: return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      console.log('running')
-      resolve(return 'test this text')
-    }, 0))
-  }
+const middlewares = [thunk]
+const mockStore = configureMockStore(middlewares)
+const testText = 'Test it.'
 
-  setTimeout(() => {
-    console.log('running')
-    resolve(return 'test this text')
-  }, 0)
+Clipboard = {
+  getString: () => {
+    return new Promise((resolve, reject) => {
+      process.nextTick(() =>
+        resolve(testText)
+      )
+    })
+  }
 }
 
-const testText = 'This is the test text, check this shit.'
-
 describe('Async actions', () => {
-	it('should call SubmitText', () => {
-    const expectedAction = { type: SUBMIT_TEXT, payload: testText }
-    const store = mockStore({ feed: [] })
-    store.dispatch(SubmitTextAction(Clipboard))
+  let expectedAction
+  let store
 
-    expect(store.getActions()).toEqual(expectedAction)
+  beforeEach(() => {
+    expectedAction = {
+      type: SUBMIT_TEXT,
+      payload: [
+        {"displayTime": 1000, "word": "Test"},
+        {"displayTime": 2200, "word": "it."}
+      ]
+    }
+
+    store = mockStore({ })
+  })
+
+	it('should call SubmitText with the correct action', async () => {
+    await store.dispatch(SubmitTextAction(null,Clipboard))
+    const dispatchedActions = store.getActions()
+    expect(store.getActions()[0]).toEqual(expectedAction)
 	})
 })
