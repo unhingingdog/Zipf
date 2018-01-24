@@ -3,10 +3,11 @@ import thunk from 'redux-thunk'
 import { weightTotal } from '../src/engine'
 import { SubmitTextAction } from '../src/actions/SubmitTextAction'
 import { SUBMIT_TEXT } from '../src/actions/types'
+import weights from '../src/weights'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
-const testText = 'Test it.'
+const testText = 'test it'
 
 Clipboard = {
   getString: () => {
@@ -26,8 +27,8 @@ describe('Async actions', () => {
     expectedAction = {
       type: SUBMIT_TEXT,
       payload: [
-        {"displayTime": 1000, "word": "Test"},
-        {"displayTime": 2200, "word": "it."}
+        {"displayTime": (weights.test || 1000), "word": "test"},
+        {"displayTime": (weights.it || 1000), "word": "it"}
       ]
     }
 
