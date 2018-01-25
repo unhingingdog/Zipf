@@ -21,7 +21,7 @@ class PlayScreen extends Component {
 	}
 
 	componentWillMount() {
-		
+
 	}
 
 	componentDidMount() {
@@ -29,7 +29,7 @@ class PlayScreen extends Component {
 	}
 
 	render() {
-
+		console.log(this.props.feed)
 		return(
 			<View>
 				<Button title="Increment" onPress={this.incrementHandler}></Button>
@@ -45,6 +45,7 @@ const mapStateToProps = state => {
 		text: state.textInput.text,
 		playing: state.play.playing,
 		place: state.play.place,
+		feed: state.feed
 	}
 }
 

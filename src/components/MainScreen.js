@@ -11,22 +11,23 @@ class MainScreen extends Component {
 		this.changeTextHandler = this.changeTextHandler.bind(this)
 		this.pasteButtonHandler = this.pasteButtonHandler.bind(this)
 	}
-	
+
 	static navigationOptions = {
 		header: null
 	}
-	
+
 	changeTextHandler(text) {
 		this.props.TextChangedAction(text)
 	}
-	
+
 	pasteButtonHandler() {
 		this.props.SubmitTextAction(this.props.navigation.dispatch)
+
 	}
-	
+
 	render() {
 		return(
-			<TextEditor 
+			<TextEditor
 				buttonMode={this.props.buttonMode}
 				textValue={this.props.text}
 				textChange={this.changeTextHandler}
@@ -37,7 +38,7 @@ class MainScreen extends Component {
 }
 
 const mapStateToProps = state => {
- return	{ 
+ return	{
 		text: state.textInput.text,
 	 	navState: state.navigation
  	}
