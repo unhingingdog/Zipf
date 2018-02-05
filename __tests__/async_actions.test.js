@@ -1,7 +1,10 @@
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { weightTotal } from '../src/engine'
-import { SubmitTextAction } from '../src/actions/SubmitTextAction'
+import {
+  SubmitTextAction,
+  SubmitTextFromEditorAction
+} from '../src/actions/SubmitTextAction'
 import { SUBMIT_TEXT } from '../src/actions/types'
 import weights from '../src/weights'
 
@@ -35,9 +38,15 @@ describe('Async actions', () => {
     store = mockStore({ })
   })
 
-	it('should call SubmitText with the correct action', async () => {
+	it('should call SubmitTextAction with the correct action', async () => {
     await store.dispatch(SubmitTextAction(null,Clipboard))
     const dispatchedActions = store.getActions()
     expect(store.getActions()[0]).toEqual(expectedAction)
 	})
+
+  it('should call SubmitTextFromEditorAction with correct action', async () => {
+    await store.dispatch(SubmitTextFromEditorAction(null, testText))
+    const dispatchedActions = store.getActions()
+    expect(store.getActions()[0]).toEqual(expectedAction)
+  })
 })
