@@ -9,9 +9,17 @@ import { SUBMIT_TEXT, TEXT_CHANGE } from './types'
 const default_speed = 1
 //inject Clipboard so it can be mocked
 
-export const SubmitTextAction = (dispatch,clipboard = Clipboard) => {
+export const SubmitTextAction = (dispatch, clipboard = Clipboard) => {
 	return async dispatch => {
 		const content = await clipboard.getString()
+		const payload = await weightEngine(content, default_speed)
+		dispatch({ type: SUBMIT_TEXT, payload })
+		navigateToScreen(dispatch, 'PlayScreen')
+	}
+}
+
+export const SubmitTextFromEditorAction = (dispatch, content) => {
+	return async dispatch => {
 		const payload = await weightEngine(content, default_speed)
 		dispatch({ type: SUBMIT_TEXT, payload })
 		navigateToScreen(dispatch, 'PlayScreen')

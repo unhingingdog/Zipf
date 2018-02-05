@@ -29,7 +29,6 @@ class PlayScreen extends Component {
 	}
 
 	render() {
-		console.log(this.props.feed)
 		return(
 			<View>
 				<Button title="Increment" onPress={this.incrementHandler}></Button>

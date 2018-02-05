@@ -3,21 +3,16 @@ import { Text, View, Button, TextInput, Keyboard } from 'react-native'
 import TextField from './TextField'
 
 export default class TextEditor extends Component {
-	
-	
+
 	render() {
 		return (
 			<View style={styles.containerStyle}>
-				<TextField 
-					textValue={this.props.textValue} 
+				<TextField
+					textValue={this.props.textValue}
 					textChange={this.props.textChange}
 					inputStyle={styles.inputStyle}
 				/>
-				<Button 
-					title="Paste"
-					onPress={this.props.pasteWithButton}
-					style={styles.buttonStyle}
-				></Button>
+				<Button title="submit" onPress={this.props.submitText} />
 			</View>
 		)
 	}
@@ -25,15 +20,13 @@ export default class TextEditor extends Component {
 
 const styles = {
 	containerStyle: {
-		flex: 1,
-		flexDirection: 'column',
-		justifyContent: 'center',
-		backgroundColor: 'black'
+		backgroundColor: 'white',
+		height: 100,
+		padding: 20
 	},
 	buttonStyle: {
 		color: 'white',
 		backgroundColor: 'aqua',
-		padding: 100,
 	},
 	inputStyle: {
 		color: 'white',
