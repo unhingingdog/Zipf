@@ -1,13 +1,18 @@
+//Faked due to interference from Navigation when testing orginal component.
+//Error seems uncommon
+//'should declare a screen' error - Easier to test identical component than
+//the hack the original component.
+
 import React, { Component } from 'react'
 import { View, Text, Button, Clipboard } from 'react-native'
 import { connect } from 'react-redux'
-import { TextChangedAction } from '../actions/TextChangedAction'
+import { TextChangedAction } from '../src/actions/TextChangedAction'
 import {
 	SubmitTextAction,
 	SubmitTextFromEditorAction
-} from '../actions/SubmitTextAction'
-import PasteButton from './PasteButton'
-import TextEditor from './TextEditor'
+} from '../src/actions/SubmitTextAction'
+import PasteButton from '../src/components/PasteButton'
+import TextEditor from '../src/components/TextEditor'
 
 export class MainScreen extends Component {
 	constructor(props) {
@@ -74,14 +79,17 @@ export class MainScreen extends Component {
 			<View>
 				{this.renderInputType()}
 				<Button
+					className="textModeButton"
 					title="Input text"
 					onPress={() => this.selectInputType('text')}
 				/>
 				<Button
+					className="speakModeButton"
 					title="Speak"
 					onPress={() => this.selectInputType('voice')}
 				/>
 				<Button
+					className="pasteModeButton"
 					title="paste from clipboard"
 					onPress={() => this.selectInputType('paste')}
 				/>

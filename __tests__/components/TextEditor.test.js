@@ -1,5 +1,5 @@
-import '../jestUtils'
-import TextEditor from '../src/components/TextEditor'
+import '../../jestUtils'
+import TextEditor from '../../src/components/TextEditor'
 
 describe('TextEditor Component', () => {
   let component
@@ -13,19 +13,16 @@ describe('TextEditor Component', () => {
 		onPress = jest.fn()
 		onTextEntry = jest.fn()
     component = shallow(
-			<TextEditor 
+			<TextEditor
 				textChange={onTextEntry}
-				pasteWithButton={onPress}
+				submitText={onPress}
 			/>
 		)
     Button = component.find('Button')
 		Input = component.find('TextField')
   })
 
-//  it('has a button with a title', () => {
-//    expect(Button.props().title).toEqual('Paste')
-//  });
-	
+
 	describe('TextEditor interactions', () => {
 		it('the paste button responds to press', () => {
 			Button.simulate('press')
@@ -33,4 +30,3 @@ describe('TextEditor Component', () => {
 		})
 	})
 })
-

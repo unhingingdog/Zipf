@@ -5,7 +5,8 @@ import Redux from 'redux'
 import { connect } from 'react-redux'
 import { PlayAction, IncrementAction } from '../actions/PlayAction'
 
-class PlayScreen extends Component {
+//exported so it can be tested without mocking store
+export class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
 		this.playPressHandler = this.playPressHandler.bind(this)
@@ -32,7 +33,7 @@ class PlayScreen extends Component {
 		return(
 			<View>
 				<Button title="Increment" onPress={this.incrementHandler}></Button>
-				<Text>Placeholder</Text>
+					<Text>Placeholder</Text>
 				<Button title="play" onPress={this.playPressHandler}></Button>
 			</View>
 		)
@@ -41,7 +42,6 @@ class PlayScreen extends Component {
 
 const mapStateToProps = state => {
 	return {
-		text: state.textInput.text,
 		playing: state.play.playing,
 		place: state.play.place,
 		feed: state.feed

@@ -1,5 +1,5 @@
-import '../jestUtils'
-import TextField from '../src/components/TextField'
+import '../../jestUtils'
+import TextField from '../../src/components/TextField'
 
 describe('TextField Component', () => {
   let component

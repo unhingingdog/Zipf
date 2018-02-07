@@ -16,7 +16,7 @@ class AppNavigation extends Component {
 	render() {
 		const { navState, dispatch } = this.props
 		return(
-		 <NavStack 
+		 <NavStack
 				navigation={addNavigationHelpers({ dispatch, state: navState })}
 		 />
 		)
