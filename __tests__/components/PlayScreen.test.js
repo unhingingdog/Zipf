@@ -1,7 +1,7 @@
 import '../../jestUtils'
 import { PlayScreen } from '../../src/components/PlayScreen'
 
-describe('MainScreen renders correctly', () => {
+describe('PlayScreen renders correctly', () => {
   let wrapper
   let props
   let feed
@@ -20,6 +20,6 @@ describe('MainScreen renders correctly', () => {
   })
 
   it('renders the buttons', () => {
-    expect(wrapper.find('Button')).toHaveLength(2)
+    expect(wrapper.find('Button')).toHaveLength(1)
   })
 })

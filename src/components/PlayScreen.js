@@ -3,39 +3,60 @@ import { View, Text, Button } from 'react-native'
 import Word from './Word'
 import Redux from 'redux'
 import { connect } from 'react-redux'
-import { PlayAction, IncrementAction } from '../actions/PlayAction'
+import { PlayAction, IncrementAction, StopAction } from '../actions/PlayAction'
 
 //exported so it can be tested without mocking store
 export class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
 		this.playPressHandler = this.playPressHandler.bind(this)
-		this.incrementHandler = this.incrementHandler.bind(this)
+		this.stopPressHandler = this.stopPressHandler.bind(this)
+		this.toggleCountdown  = this.startPlayer.bind(this)
 	}
 
 	playPressHandler() {
 		this.props.PlayAction()
 	}
 
-	incrementHandler() {
-		this.props.IncrementAction()
+	stopPressHandler() {
+		this.props.StopAction()
+	}
+
+	startPlayer() {
+		const { place, feed, IncrementAction, playing } = this.props
+		const interval = feed[place].displayTime
+		this.countdown = setInterval(IncrementAction, interval)
 	}
 
 	componentWillMount() {
-
+		this.startPlayer()
 	}
 
-	componentDidMount() {
-		//call increment after state.word
+	// componentWillReceiveProps(nextProps) {
+	// 	console.log(nextProps)
+	// 	if (this.props.playing !== nextProps.playing) {
+	// 		switch (!!this.props.playing) {
+	// 			case true:
+	// 				this.toggleCountdown
+	// 			case false:
+	// 				this.props.StopAction()
+	// 				clearInterval(this.countdown)
+	// 		}
+	// 	}
+	// }
+
+	componentWillUnmount() {
+		this.props.StopAction()
+		clearInterval(this.countdown)
 	}
 
 	render() {
-		console.log(this.props.feed[this.props.place])
+		const { place, feed } = this.props
 		return(
 			<View>
-				<Button title="Increment" onPress={this.incrementHandler}></Button>
-					<Text>Placeholder</Text>
+				<Text>{feed[place].word}</Text>
 				<Button title="play" onPress={this.playPressHandler}></Button>
+				<Button title="stop" onPress={this.stopPressHandler}></Button>
 			</View>
 		)
 	}
@@ -51,5 +72,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
 	PlayAction,
+	StopAction,
 	IncrementAction
 })(PlayScreen)
