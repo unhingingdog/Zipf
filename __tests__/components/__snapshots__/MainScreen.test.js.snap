@@ -1,30 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MainScreen renders correctly changes input mode to voice 1`] = `
-<View>
-  <PasteButton
-    pasteWithButton={[Function]}
-    textChange={[Function]}
-    textValue="test this shit"
-  />
-  <Button
-    className="textModeButton"
-    onPress={[Function]}
-    title="Input text"
-  />
-  <Button
-    className="speakModeButton"
-    onPress={[Function]}
-    title="Speak"
-  />
-  <Button
-    className="pasteModeButton"
-    onPress={[Function]}
-    title="paste from clipboard"
-  />
-</View>
-`;
-
 exports[`MainScreen renders correctly default UI matches the default snapshot 1`] = `
 <View>
   <PasteButton

@@ -30,6 +30,7 @@ export class PlayScreen extends Component {
 	}
 
 	render() {
+		console.log(this.props.feed[this.props.place])
 		return(
 			<View>
 				<Button title="Increment" onPress={this.incrementHandler}></Button>

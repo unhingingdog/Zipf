@@ -29,7 +29,7 @@ describe('Feed reducer', () => {
 
   it('takes a feed from a text submission action', () => {
     expect(feedReducer(initial_state, action))
-      .toEqual({...initial_state, feed: example_feed })
+      .toEqual(example_feed)
   })
 
   it('handles an unrecognised type with the default action', () => {
