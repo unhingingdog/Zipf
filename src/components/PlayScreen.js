@@ -19,6 +19,19 @@ export class PlayScreen extends Component {
 		this.pausePressHandler = this.pausePressHandler.bind(this)
 		this.stopPressHandler  = this.stopPressHandler.bind(this)
 		this.playWord          = this.playWord.bind(this)
+		this.playerUIMode      = this.playerUIMode.bind(this)
+
+		this.calculateRemainingReadTime = this.calculateRemainingReadTime.bind(this)
+	}
+
+	calculateRemainingReadTime(place, feed) {
+		let remainingTime = 0
+		for(let i = place; i < feed.length; i++) {
+			remainingTime += feed[i].displayTime
+		}
+		const seconds = (remainingTime/1000) % 60
+		const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
+		return minutes.toFixed().toString() + ':' + seconds.toFixed().toString()
 	}
 
 	playPressHandler() {
@@ -52,16 +65,31 @@ export class PlayScreen extends Component {
 		this.props.StopAction()
 	}
 
+	playerUIMode() {
+		const { place, feed, playing } = this.props
+
+		if (playing) {
+			return(
+				<View>
+					<Text>{feed[place].word}</Text>
+					<Button title="pause" onPress={this.pausePressHandler}></Button>
+					<Button title="stop" onPress={this.stopPressHandler}></Button>
+				</View>
+			)
+		} else {
+			return(
+				<View>
+					<Text>{feed[place].word}</Text>
+					<Text>{`${place} of ${feed.length}`}</Text>
+					<Text>{this.calculateRemainingReadTime(place, feed)}</Text>
+					<Button title="play" onPress={this.playPressHandler}></Button>
+				</View>
+			)
+		}
+	}
+
 	render() {
-		const { place, feed } = this.props
-		return(
-			<View>
-				<Text>{feed[place].word}</Text>
-				<Button title="play" onPress={this.playPressHandler}></Button>
-				<Button title="pause" onPress={this.pausePressHandler}></Button>
-				<Button title="stop" onPress={this.stopPressHandler}></Button>
-			</View>
-		)
+		return <View>{this.playerUIMode()}</View>
 	}
 }
 
