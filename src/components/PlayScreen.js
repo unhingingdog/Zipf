@@ -9,9 +9,10 @@ import { PlayAction, IncrementAction, StopAction } from '../actions/PlayAction'
 export class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
+		console.log('constructor fired')
 		this.playPressHandler = this.playPressHandler.bind(this)
 		this.stopPressHandler = this.stopPressHandler.bind(this)
-		this.toggleCountdown  = this.startPlayer.bind(this)
+		this.playWord         = this.playWord.bind(this)
 	}
 
 	playPressHandler() {
@@ -22,35 +23,51 @@ export class PlayScreen extends Component {
 		this.props.StopAction()
 	}
 
-	startPlayer() {
-		const { place, feed, IncrementAction, playing } = this.props
-		const interval = feed[place].displayTime
-		this.countdown = setInterval(IncrementAction, interval)
+	playWord(interval, playing, action) {
+		console.log(interval, this.props.feed[interval])
+		this.countdown = setInterval(action, interval)
 	}
 
 	componentWillMount() {
-		this.startPlayer()
+		console.log('component will mount')
 	}
 
-	// componentWillReceiveProps(nextProps) {
-	// 	console.log(nextProps)
-	// 	if (this.props.playing !== nextProps.playing) {
-	// 		switch (!!this.props.playing) {
-	// 			case true:
-	// 				this.toggleCountdown
-	// 			case false:
-	// 				this.props.StopAction()
-	// 				clearInterval(this.countdown)
-	// 		}
-	// 	}
-	// }
+	componentDidMount() {
+		console.log('component did mount')
+	}
+
+	componentWillReceiveProps(nextProps) {
+		console.log('component receiving props')
+		console.log(nextProps.place)
+	}
+
+	shouldComponentUpdate() {
+		console.log('should component update')
+		return true
+	}
+
+	componentWillUpdate(nextProps, nextState) {
+		console.log('component will update')
+		clearInterval(this.countdown)
+		console.log(nextProps.playing)
+	}
+
+	componentDidUpdate() {
+		console.log('component updated')
+		const { place, feed, IncrementAction, playing } = this.props
+		const interval = feed[place].displayTime
+		if (this.props.playing) this.playWord(interval, playing, IncrementAction)
+	}
+
 
 	componentWillUnmount() {
-		this.props.StopAction()
-		clearInterval(this.countdown)
+		console.log('component unmounted')
+		// this.props.StopAction()
+		// clearInterval(this.countdown)
 	}
 
 	render() {
+		console.log('rendering')
 		const { place, feed } = this.props
 		return(
 			<View>
