@@ -4,6 +4,7 @@ import { PlayAction,
 				 StopAction,
 				 IncrementAction,
 				 DecrementAction,
+				 SeekPlaceAction
 			  }
 from '../src/actions/PlayAction'
 import { TEXT_CHANGE,
@@ -12,7 +13,8 @@ import { TEXT_CHANGE,
 				 INCREMENT,
 				 DECREMENT,
 			   PAUSE,
-				 STOP
+				 STOP,
+				 SEEK_PLACE
 			 }
 from '../src/actions/types'
 
@@ -45,5 +47,10 @@ describe('actions', () => {
 	it('should call decrement', () => {
 		const expectedAction = { type: DECREMENT }
 		expect(DecrementAction()).toEqual(expectedAction)
+	})
+
+	it('should call seek place', () => {
+		const expectedAction = { type: SEEK_PLACE, payload: { place: 100 } }
+		expect(SeekPlaceAction(100)).toEqual(expectedAction)
 	})
 })

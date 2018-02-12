@@ -1,9 +1,11 @@
-import { PLAY,
-				 INCREMENT,
-				 DECREMENT,
-				 PAUSE,
-				 STOP
-			 } from './types'
+import {
+	PLAY,
+  INCREMENT,
+	DECREMENT,
+	PAUSE,
+	STOP,
+	SEEK_PLACE
+} from './types'
 
 export const PlayAction = () => {
 	return { type: PLAY }
@@ -23,4 +25,8 @@ export const IncrementAction = () => {
 
 export const DecrementAction = () => {
 	return { type: DECREMENT }
+}
+
+export const SeekPlaceAction = place => {
+	return { type: SEEK_PLACE, payload: { place }}
 }

@@ -1,9 +1,11 @@
-import { PLAY,
-				 PAUSE,
-				 STOP,
-				 INCREMENT,
-				 DECREMENT }
-from '../actions/types'
+import {
+	PLAY,
+	PAUSE,
+	STOP,
+	INCREMENT,
+	DECREMENT,
+  SEEK_PLACE
+} from '../actions/types'
 
 const initial_state = { playing: false, place: 0 }
 
@@ -19,6 +21,8 @@ export default (state = initial_state, action) => {
 			return { ...state, place: state.place + 1 }
 		case DECREMENT:
 			return { ...state, place: state.place - 1 }
+		case SEEK_PLACE:
+			return { ...state, place: action.payload.place}
 		default:
 			return state
 	}

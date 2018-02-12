@@ -1,9 +1,11 @@
 import PlayReducer from '../../src/reducers/PlayReducer'
-import { PLAY,
-			   INCREMENT,
-			 	 DECREMENT,
-				 STOP,
-				 PAUSE
+import {
+	PLAY,
+	INCREMENT,
+	DECREMENT,
+	STOP,
+	PAUSE,
+	SEEK_PLACE
 } from '../../src/actions/types'
 
 describe('PlayReducer', () => {
@@ -25,6 +27,13 @@ describe('PlayReducer', () => {
   it('decrements place when DECREMENT is passed in', () => {
     expect(PlayReducer(initial_state, { type: DECREMENT }).place).toEqual(-1)
   })
+
+	it('sets place when SEEK_PLACE is called with a value', () => {
+		expect(PlayReducer(initial_state, {
+			type: SEEK_PLACE,
+			payload: { place: 100 }
+		}).place).toEqual(100)
+	})
 })
 
 describe('Pause and stop', () => {

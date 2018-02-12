@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button, TouchableOpacity } from 'react-native'
+import { View, Text, Button, TouchableOpacity, Slider } from 'react-native'
 import Word from './Word'
 import Redux from 'redux'
 import { connect } from 'react-redux'
@@ -7,7 +7,8 @@ import {
 	IncrementAction,
 	PlayAction,
 	PauseAction,
-	StopAction
+	StopAction,
+	SeekPlaceAction
 } from '../actions/PlayAction'
 
 //exported so it can be tested without mocking store
@@ -20,6 +21,7 @@ export class PlayScreen extends Component {
 		this.stopPressHandler  = this.stopPressHandler.bind(this)
 		this.playWord          = this.playWord.bind(this)
 		this.playerUIMode      = this.playerUIMode.bind(this)
+		this.slideHandler 	 = this.slideHandler.bind(this)
 
 		this.calculateRemainingReadTime = this.calculateRemainingReadTime.bind(this)
 	}
@@ -44,6 +46,10 @@ export class PlayScreen extends Component {
 
 	stopPressHandler() {
 		this.props.StopAction()
+	}
+
+	slideHandler(place) {
+		this.props.SeekPlaceAction(place)
 	}
 
 	playWord(interval, playing, action) {
@@ -80,6 +86,12 @@ export class PlayScreen extends Component {
 			return(
 				<View className="not-playing">
 					<Text>{feed[place].word}</Text>
+					<Slider
+						maximumValue={feed.length}
+						onValueChange={this.slideHandler}
+						value={place}
+						step={1}
+					/>
 					<Text>{`${place} of ${feed.length}`}</Text>
 					<Text>{this.calculateRemainingReadTime(place, feed)}</Text>
 					<Button title="play" onPress={this.playPressHandler}></Button>
@@ -89,6 +101,7 @@ export class PlayScreen extends Component {
 	}
 
 	render() {
+		console.log(this.props.place)
 		return <View><TouchableOpacity>{this.playerUIMode()}</TouchableOpacity></View>
 	}
 }
@@ -105,5 +118,6 @@ export default connect(mapStateToProps, {
 	PlayAction,
 	PauseAction,
 	StopAction,
-	IncrementAction
+	IncrementAction,
+	SeekPlaceAction
 })(PlayScreen)
