@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Button } from 'react-native'
+import { View, Text, Button, TouchableOpacity } from 'react-native'
 import Word from './Word'
 import Redux from 'redux'
 import { connect } from 'react-redux'
@@ -70,7 +70,7 @@ export class PlayScreen extends Component {
 
 		if (playing) {
 			return(
-				<View>
+				<View className="playing">
 					<Text>{feed[place].word}</Text>
 					<Button title="pause" onPress={this.pausePressHandler}></Button>
 					<Button title="stop" onPress={this.stopPressHandler}></Button>
@@ -78,7 +78,7 @@ export class PlayScreen extends Component {
 			)
 		} else {
 			return(
-				<View>
+				<View className="not-playing">
 					<Text>{feed[place].word}</Text>
 					<Text>{`${place} of ${feed.length}`}</Text>
 					<Text>{this.calculateRemainingReadTime(place, feed)}</Text>
@@ -89,7 +89,7 @@ export class PlayScreen extends Component {
 	}
 
 	render() {
-		return <View>{this.playerUIMode()}</View>
+		return <View><TouchableOpacity>{this.playerUIMode()}</TouchableOpacity></View>
 	}
 }
 
