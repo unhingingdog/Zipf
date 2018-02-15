@@ -1,13 +1,14 @@
-import weights from './weights'
-const wordLengthWeights = { moreThan_7: 200} //temp
-const puncuationWeights = { endOfSentence: 1200} //temp
+import {
+	wordLengthWeights,
+	puncuationWeights,
+	wordFrequencyWeights,
+	frequencyDefaultWeight
+} from './weightConfig'
 
-
-const frequencyDefaultWeight = 1000
 
 export const weighByFrequency = word => {
 	word = word.toLowerCase()
-	return weights[word] ? weights[word] : frequencyDefaultWeight
+	return wordFrequencyWeights[word] ? wordFrequencyWeights[word] : frequencyDefaultWeight
 }
 
 export const weightByLength = word => {
@@ -18,19 +19,18 @@ export const weightByPuncuation = word => {
 	return word[word.length - 1] ==='.' ? puncuationWeights.endOfSentence : 0
 }
 
-export const weightTotal = (word, readingSpeed) => {
+export const weightTotal = (word) => {
 	return (weighByFrequency(word)
 				 + weightByLength(word)
-				 + weightByPuncuation(word)
-				 * readingSpeed)
+				 + weightByPuncuation(word))
 }
 
-export default textEngine = (text, readingSpeed) => {
+export default textEngine = text => {
 	return new Promise((resolve, reject) => {
 		let feed = []
 		const splitText = text.split(' ')
 		splitText.map(word => feed.push(
-			{word, displayTime: weightTotal(word, 1)}
+			{ word, displayTime: weightTotal(word) }
 		))
 
 		const error = new Error(['Text engine failed to return the correct feed.'])

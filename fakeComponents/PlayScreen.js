@@ -1,12 +1,5 @@
 import React, { Component } from 'react'
-import {
-	View,
-	Text,
-	Button,
-	TouchableOpacity,
-	Slider,
-	
-} from 'react-native'
+import { View, Text, Button, TouchableOpacity, Slider } from 'react-native'
 import Word from './Word'
 import Redux from 'redux'
 import { connect } from 'react-redux'
@@ -38,7 +31,6 @@ export class PlayScreen extends Component {
 		for(let i = place; i < feed.length; i++) {
 			remainingTime += feed[i].displayTime
 		}
-		remainingTime *= this.props.speed
 		const seconds = (remainingTime/1000) % 60
 		const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
 		return minutes.toFixed().toString() + ':' + seconds.toFixed().toString()
@@ -72,17 +64,17 @@ export class PlayScreen extends Component {
 		// }
 	}
 
-	// shouldComponentUpdate(nextProps) {
-	// 	// if(nextProps.place === this.props.feed.length) {
-	// 	// 	return false
-	// 	// } else {
-	// 	// 	return true
-	// 	// }
-	// }
+	shouldComponentUpdate(nextProps) {
+		// if(nextProps.place === this.props.feed.length) {
+		// 	return false
+		// } else {
+		// 	return true
+		// }
+	}
 
 	componentDidUpdate() {
-		const { place, feed, speed, IncrementAction, playing } = this.props
-		const interval = feed[place].displayTime * (speed/50) //temp
+		const { place, feed, IncrementAction, playing } = this.props
+		const interval = feed[place].displayTime
 		if (this.props.playing) this.playWord(interval, playing, IncrementAction)
 	}
 
@@ -121,6 +113,7 @@ export class PlayScreen extends Component {
 	}
 
 	render() {
+		console.log(this.props.place)
 		return <View><TouchableOpacity>{this.playerUIMode()}</TouchableOpacity></View>
 	}
 }
@@ -129,8 +122,7 @@ const mapStateToProps = state => {
 	return {
 		playing: state.play.playing,
 		place: state.play.place,
-		feed: state.feed,
-		speed: state.speed
+		feed: state.feed
 	}
 }
 

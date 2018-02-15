@@ -1,19 +1,22 @@
 import { SUBMIT_TEXT } from '../../src/actions/types'
 import feedReducer from '../../src/reducers/feedReducer'
-import weights from '../../src/weights'
+import {
+  wordFrequencyWeights,
+  frequencyDefaultWeight
+} from '../../src/weightConfig'
 
 describe('Feed reducer', () => {
   let action
   let initial_state
 
   const example_feed = [
-    {displayTime: (weights.test || 1000), word: "test"},
-    {displayTime: (weights.it || 1000), word: "it"},
-    {displayTime: (weights.test || 1000), word: "test"},
-    {displayTime: (weights.it || 1000), word: "it"},
-    {displayTime: (weights.test || 1000), word: "test"},
-    {displayTime: (weights.it || 1000), word: "it"},
-    {displayTime: (weights.good || 1000), word: "good"},
+    {displayTime: (wordFrequencyWeights.test || frequencyDefaultWeight), word: "test"},
+    {displayTime: (wordFrequencyWeights.it   || frequencyDefaultWeight), word: "it"},
+    {displayTime: (wordFrequencyWeights.test || frequencyDefaultWeight), word: "test"},
+    {displayTime: (wordFrequencyWeights.it   || frequencyDefaultWeight), word: "it"},
+    {displayTime: (wordFrequencyWeights.test || frequencyDefaultWeight), word: "test"},
+    {displayTime: (wordFrequencyWeights.it   || frequencyDefaultWeight), word: "it"},
+    {displayTime: (wordFrequencyWeights.good || frequencyDefaultWeight), word: "good"},
   ]
 
   beforeEach(() => {

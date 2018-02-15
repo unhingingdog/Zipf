@@ -5,7 +5,7 @@ import {
 	DECREMENT,
 	STOP,
 	PAUSE,
-	SEEK_PLACE
+	SEEK_PLACE,
 } from '../../src/actions/types'
 
 describe('PlayReducer', () => {

@@ -1,6 +1,11 @@
 import engine from '../src/engine'
-import weights from '../src/weights'
 import tex from '../src/testtext'
+import {
+  wordFrequencyWeights,
+  frequencyDefaultWeight,
+  wordLengthWeights,
+  puncuationWeights
+} from '../src/weightConfig'
 import {
   weighByFrequency,
   weightByLength,
@@ -9,16 +14,8 @@ import {
 } from '../src/engine'
 
 describe("Text engine", () => {
-  let wordLengthWeights
-  let puncuationWeights
-  let frequencyDefaultWeight
-  let defaultSpeed
-
   beforeEach(() => {
     text = tex
-    wordLengthWeights = { moreThan_7: 200}
-    puncuationWeights = { endOfSentence: 1200}
-    frequencyDefaultWeight = 1000
     defaultSpeed = 1
   })
 
@@ -39,12 +36,12 @@ describe("Text engine", () => {
 
   describe("Frequency weighting (weighByFrequency)", () => {
     it('should return a feed with the correct weights', () => {
-      expect(weighByFrequency('the')).toEqual(weights.the)
+      expect(weighByFrequency('the')).toEqual(wordFrequencyWeights.the)
       expect(weighByFrequency('stellarator')).toEqual(frequencyDefaultWeight)
     })
 
     it('should ignore capilaisation', () => {
-      expect(weighByFrequency('The')).toEqual(weights.the)
+      expect(weighByFrequency('The')).toEqual(wordFrequencyWeights.the)
     })
   })
 
@@ -65,27 +62,20 @@ describe("Text engine", () => {
 
   describe("Total weight (weightTotal)", () => {
     it('correctly returns a total weight for a given word', () => {
-      expect(weightTotal('the', defaultSpeed)).toEqual(weights.the)
+      expect(weightTotal('the')).toEqual(wordFrequencyWeights.the)
 
-      expect(weightTotal('stellarator', defaultSpeed))
+      expect(weightTotal('stellarator'))
         .toEqual(frequencyDefaultWeight + wordLengthWeights.moreThan_7)
 
-      expect(weightTotal('stellarator.', defaultSpeed))
+      expect(weightTotal('stellarator.'))
         .toEqual(frequencyDefaultWeight
                  + wordLengthWeights.moreThan_7
                  + puncuationWeights.endOfSentence
         )
     })
 
-    it('correcty adjusts the weighting by the chosen readingSpeed', () => {
-      expect(weightTotal('stellarator.', defaultSpeed * 2))
-      .toEqual(frequencyDefaultWeight
-               + wordLengthWeights.moreThan_7
-               + puncuationWeights.endOfSentence
-               * (defaultSpeed * 2)
-      )
-      //sanity check -- will break with config change
-      expect(weightTotal('stellarator.', defaultSpeed * 0.5)).toEqual(1800)
+    it('passes a hard coded test for sanity', () => {
+      expect(weightTotal('stellarator.')).toEqual(2400)
     })
   })
 })

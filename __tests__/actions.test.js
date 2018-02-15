@@ -1,22 +1,25 @@
 import { TextChangedAction } from '../src/actions/TextChangedAction'
-import { PlayAction,
-				 PauseAction,
-				 StopAction,
-				 IncrementAction,
-				 DecrementAction,
-				 SeekPlaceAction
-			  }
-from '../src/actions/PlayAction'
-import { TEXT_CHANGE,
-				 SUBMIT_TEXT,
-				 PLAY,
-				 INCREMENT,
-				 DECREMENT,
-			   PAUSE,
-				 STOP,
-				 SEEK_PLACE
-			 }
-from '../src/actions/types'
+import {
+	PlayAction,
+	PauseAction,
+	StopAction,
+	IncrementAction,
+	DecrementAction,
+	SeekPlaceAction,
+} from '../src/actions/PlayAction'
+import { ChangeSpeedAction } from '../src/actions/ChangeSpeedAction'
+
+import {
+	TEXT_CHANGE,
+	SUBMIT_TEXT,
+	PLAY,
+	INCREMENT,
+	DECREMENT,
+	PAUSE,
+	STOP,
+	SEEK_PLACE,
+	CHANGE_SPEED
+} from '../src/actions/types'
 
 describe('actions', () => {
 	it('should call TextChange', () => {
@@ -52,5 +55,10 @@ describe('actions', () => {
 	it('should call seek place', () => {
 		const expectedAction = { type: SEEK_PLACE, payload: { place: 100 } }
 		expect(SeekPlaceAction(100)).toEqual(expectedAction)
+	})
+
+	it('should change speed', () => {
+		const expectedAction = { type: CHANGE_SPEED, payload: 50 }
+		expect(ChangeSpeedAction(50)).toEqual(expectedAction)
 	})
 })

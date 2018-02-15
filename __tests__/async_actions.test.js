@@ -6,11 +6,15 @@ import {
   SubmitTextFromEditorAction
 } from '../src/actions/SubmitTextAction'
 import { SUBMIT_TEXT } from '../src/actions/types'
-import weights from '../src/weights'
+import {
+  wordFrequencyWeights,
+  frequencyDefaultWeight
+} from '../src/weightConfig'
 
 const middlewares = [thunk]
 const mockStore = configureMockStore(middlewares)
 const testText = 'test it'
+
 
 Clipboard = {
   getString: () => {
@@ -30,8 +34,8 @@ describe('Async actions', () => {
     expectedAction = {
       type: SUBMIT_TEXT,
       payload: [
-        {"displayTime": (weights.test || 1000), "word": "test"},
-        {"displayTime": (weights.it || 1000), "word": "it"}
+        {"displayTime": (wordFrequencyWeights.test || frequencyDefaultWeight), "word": "test"},
+        {"displayTime": (wordFrequencyWeights.it || frequencyDefaultWeight), "word": "it"}
       ]
     }
 
