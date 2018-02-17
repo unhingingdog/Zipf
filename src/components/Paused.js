@@ -7,7 +7,6 @@ export default class PausedMode extends Component {
     this.state = { speedSliderMode: false }
 
     this.placeSliderHandler 	 = this.placeSliderHandler.bind(this)
-    this.speedSliderHandler 	 = this.speedSliderHandler.bind(this)
     this.renderSlider 	 		   = this.renderSlider.bind(this)
     this.calculateRemainingReadTime = this.calculateRemainingReadTime.bind(this)
 
@@ -34,22 +33,19 @@ export default class PausedMode extends Component {
     this.props.seek(place)
   }
 
-  speedSliderHandler(speed) {
-    this.props.changeSpeed(speed)
-  }
-
   renderSlider() {
     if(this.state.speedSliderMode) {
       return (<Slider
         maximumValue={100}
-        onSlidingComplete={this.props.speedSliderHandler}
+        onSlidingComplete={this.props.changeSpeed}
         value={this.props.speed}
         step={1}
       />)
     } else {
       return (<Slider
         maximumValue={this.props.feed.length}
-        onValueChange={this.props.placeSliderHandler}
+        onValueChange={this.placeSliderHandler}
+
         value={this.props.place}
         step={1}
       />)
