@@ -19,9 +19,11 @@ export default class PausedMode extends Component {
       remainingTime += feed[i].displayTime
     }
     remainingTime *= speed
-    const seconds = (remainingTime/1000) % 60
+    let seconds = (remainingTime/1000) % 60
     const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
-    return minutes.toFixed().toString() + ':' + seconds.toFixed().toString()
+    seconds = seconds.toFixed().toString().length < 2 ?
+      '0' + seconds.toFixed().toString() : seconds.toFixed().toString()
+    return minutes.toFixed().toString() + ':' + seconds
   }
 
   sliderPicker(mode) {
@@ -65,7 +67,7 @@ export default class PausedMode extends Component {
         <Button title="speed" onPress={() => this.sliderPicker(true)} />
         <Text>{`${place} of ${feed.length}`}</Text>
         <Text>Insert WPM</Text>
-        <Text>{this.calculateRemainingReadTime(place, feed)}</Text>
+        <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
         <Text>{`Speed: ${speed}`}</Text>
         <Button title="play" onPress={startPlaying}></Button>
         <Button title="stop" onPress={revert}></Button>

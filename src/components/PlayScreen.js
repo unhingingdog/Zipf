@@ -81,6 +81,7 @@ export class PlayScreen extends Component {
 		} else {
 			renderMode = <Paused
 				word={feed[place].word}
+				place={place}
 				feed={feed}
 				playing={playing}
 				speed={speed}
