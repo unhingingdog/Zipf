@@ -34,21 +34,25 @@ export class PlayScreen extends Component {
 		this.countdown = setInterval(action, interval)
 	}
 
-	componentWillUpdate() {
-		const { place, feed } = this.props
+	componentWillUpdate(nextProps) {
+		//const { place, feed } = this.props
 		clearInterval(this.countdown)
-		if(place - 2 === feed.length) {
-			this.props.PauseAction()
+
+		if(nextProps.place === this.props.feed.length - 2) {
+			PauseAction()
 		}
 	}
 
-	// shouldComponentUpdate(nextProps) {
-	// 	// if(nextProps.place === this.props.feed.length) {
-	// 	// 	return false
-	// 	// } else {
-	// 	// 	return true
-	// 	// }
-	// }
+	shouldComponentUpdate(nextProps) {
+		const { feed, PauseAction } = this.props
+
+		if(nextProps.place === feed.length - 2) {
+			PauseAction()
+			return false
+		} else {
+			return true
+		}
+	}
 
 	componentDidUpdate() {
 		const { place, feed, speed, IncrementAction, playing } = this.props

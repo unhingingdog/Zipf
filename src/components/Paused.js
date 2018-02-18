@@ -33,9 +33,7 @@ export default class PausedMode extends Component {
   }
 
   calculateWordsPerMinute(totalTime, numberOfWords, speed) {
-    console.log(totalTime)
     const timeInMinutes = totalTime / 60000
-    console.log(timeInMinutes, numberOfWords)
     return (numberOfWords / timeInMinutes).toFixed().toString() + ' WPM'
   }
 
@@ -81,7 +79,7 @@ export default class PausedMode extends Component {
       />)
     } else {
       return (<Slider
-        maximumValue={this.props.feed.length}
+        maximumValue={this.props.feed.length - 1}
         onValueChange={this.placeSliderActiveHandler}
         onSlidingComplete={this.placeSliderFinishedHandler}
         value={this.props.place}
@@ -99,7 +97,7 @@ export default class PausedMode extends Component {
         <View>{this.renderSlider()}</View>
         <Button title="place" onPress={() => this.sliderPicker(false)} />
         <Button title="speed" onPress={() => this.sliderPicker(true)} />
-        <Text>{`${place} of ${feed.length}`}</Text>
+        <Text>{`${place + 1} of ${feed.length + 1}`}</Text>
         <Text>{this.calculateWordsPerMinute(totalTime, feed.length, speed)}</Text>
         <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
         <Text>{`Speed: ${speed}`}</Text>
