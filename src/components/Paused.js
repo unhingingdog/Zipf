@@ -4,10 +4,16 @@ import { Text, View, Button, Slider } from 'react-native'
 export default class PausedMode extends Component {
   constructor(props) {
     super(props)
-    this.state = { speedSliderMode: false }
+    this.state = {
+      speedSliderMode: false,
+      placeSliderActive: false,
+      sliderWordPreview: []
+    }
 
-    this.placeSliderHandler 	 = this.placeSliderHandler.bind(this)
-    this.renderSlider 	 		   = this.renderSlider.bind(this)
+    this.placeSliderActiveHandler 	= this.placeSliderActiveHandler.bind(this)
+    this.placeSliderFinishedHandler = this.placeSliderFinishedHandler.bind(this)
+    this.renderWord                 = this.renderWord.bind(this)
+    this.renderSlider 	 		        = this.renderSlider.bind(this)
     this.calculateRemainingReadTime = this.calculateRemainingReadTime.bind(this)
 
   }
@@ -29,8 +35,32 @@ export default class PausedMode extends Component {
     this.setState({ speedSliderMode: mode })
   }
 
-  placeSliderHandler(place) {
+  placeSliderActiveHandler(place) {
+    const { feed } = this.props
+    this.setState({ placeSliderActive: true })
+    const currentWord = feed[place] ? feed[place].word : ' '
+    const previousWord = feed[place - 1] ? feed[place - 1].word : ' '
+    const nextWord = feed[place + 1] ? feed[place + 1].word : ' '
+    this.setState({ sliderWordPreview: [previousWord, currentWord, nextWord] })
+  }
+
+  placeSliderFinishedHandler(place) {
+    this.setState({ placeSliderActive: false })
     this.props.seek(place)
+  }
+
+  renderWord() {
+   if (this.state.placeSliderActive) {
+     return(
+      <View>
+        <Text>{this.state.sliderWordPreview[0]}</Text>
+        <Text>{this.state.sliderWordPreview[1]}</Text>
+        <Text>{this.state.sliderWordPreview[2]}</Text>
+      </View>
+     )
+   } else {
+     return <Text>{this.props.word}</Text>
+   }
   }
 
   renderSlider() {
@@ -44,8 +74,8 @@ export default class PausedMode extends Component {
     } else {
       return (<Slider
         maximumValue={this.props.feed.length}
-        onValueChange={this.placeSliderHandler}
-
+        onValueChange={this.placeSliderActiveHandler}
+        onSlidingComplete={this.placeSliderFinishedHandler}
         value={this.props.place}
         step={1}
       />)
@@ -53,11 +83,11 @@ export default class PausedMode extends Component {
   }
 
   render() {
-    const { word, place, speed, feed, startPlaying, revert } = this.props
+    const { place, speed, feed, startPlaying, revert } = this.props
 
     return (
       <View>
-        <Text>{word}</Text>
+        <View>{this.renderWord()}</View>
         <View>{this.renderSlider()}</View>
         <Button title="place" onPress={() => this.sliderPicker(false)} />
         <Button title="speed" onPress={() => this.sliderPicker(true)} />
