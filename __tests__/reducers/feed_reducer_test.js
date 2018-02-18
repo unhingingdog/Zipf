@@ -8,6 +8,7 @@ import {
 describe('Feed reducer', () => {
   let action
   let initial_state
+  let totalDisplayTime
 
   const example_feed = [
     {displayTime: (wordFrequencyWeights.test || frequencyDefaultWeight), word: "test"},
@@ -19,10 +20,18 @@ describe('Feed reducer', () => {
     {displayTime: (wordFrequencyWeights.good || frequencyDefaultWeight), word: "good"},
   ]
 
+
   beforeEach(() => {
     initial_state = {
-      feed: []
+      feed: {
+        feed: [],
+        totalDisplayTime: 0
+      }
     }
+
+    totalDisplayTime = example_feed.reduce((accumulator, feedItem) => {
+      return accumulator + feedItem.displayTime
+    }, 0)
 
     action = {
       type: SUBMIT_TEXT,
@@ -32,7 +41,7 @@ describe('Feed reducer', () => {
 
   it('takes a feed from a text submission action', () => {
     expect(feedReducer(initial_state, action))
-      .toEqual(example_feed)
+      .toEqual({ feed: example_feed, totalDisplayTime: totalDisplayTime })
   })
 
   it('handles an unrecognised type with the default action', () => {

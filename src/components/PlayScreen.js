@@ -66,6 +66,7 @@ export class PlayScreen extends Component {
 			feed,
 			place,
 			speed,
+			totalTime,
 			playing,
 			PlayAction,
 			StopAction,
@@ -83,6 +84,7 @@ export class PlayScreen extends Component {
 				word={feed[place].word}
 				place={place}
 				feed={feed}
+				totalTime={totalTime}
 				playing={playing}
 				speed={speed}
 				startPlaying={PlayAction}
@@ -99,7 +101,8 @@ const mapStateToProps = state => {
 	return {
 		playing: state.play.playing,
 		place: state.play.place,
-		feed: state.feed,
+		feed: state.feed. feed,
+		totalTime: state.feed.totalDisplayTime,
 		speed: state.speed,
 	}
 }

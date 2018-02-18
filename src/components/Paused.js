@@ -15,6 +15,7 @@ export default class PausedMode extends Component {
     this.renderWord                 = this.renderWord.bind(this)
     this.renderSlider 	 		        = this.renderSlider.bind(this)
     this.calculateRemainingReadTime = this.calculateRemainingReadTime.bind(this)
+    this.calculateWordsPerMinute    = this.calculateWordsPerMinute.bind(this)
 
   }
 
@@ -29,6 +30,13 @@ export default class PausedMode extends Component {
     seconds = seconds.toFixed().toString().length < 2 ?
       '0' + seconds.toFixed().toString() : seconds.toFixed().toString()
     return minutes.toFixed().toString() + ':' + seconds
+  }
+
+  calculateWordsPerMinute(totalTime, numberOfWords, speed) {
+    console.log(totalTime)
+    const timeInMinutes = totalTime / 60000
+    console.log(timeInMinutes, numberOfWords)
+    return (numberOfWords / timeInMinutes).toFixed().toString() + ' WPM'
   }
 
   sliderPicker(mode) {
@@ -83,16 +91,16 @@ export default class PausedMode extends Component {
   }
 
   render() {
-    const { place, speed, feed, startPlaying, revert } = this.props
+    const { place, speed, feed, totalTime, startPlaying, revert } = this.props
 
     return (
       <View>
-        <View>{this.renderWord()}</View>
+        {this.renderWord()}
         <View>{this.renderSlider()}</View>
         <Button title="place" onPress={() => this.sliderPicker(false)} />
         <Button title="speed" onPress={() => this.sliderPicker(true)} />
         <Text>{`${place} of ${feed.length}`}</Text>
-        <Text>Insert WPM</Text>
+        <Text>{this.calculateWordsPerMinute(totalTime, feed.length, speed)}</Text>
         <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
         <Text>{`Speed: ${speed}`}</Text>
         <Button title="play" onPress={startPlaying}></Button>
