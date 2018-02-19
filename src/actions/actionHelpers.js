@@ -8,3 +8,7 @@ export const navigateToScreen = (dispatch, screen) => {
 		})
 	)
 }
+
+export const navigateBack = dispatch => {
+	dispatch(NavigationActions.back())
+}

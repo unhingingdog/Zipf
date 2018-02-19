@@ -21,19 +21,30 @@ import {
 	SeekPlaceAction,
 } from '../actions/PlayAction'
 import { ChangeSpeedAction } from '../actions/ChangeSpeedAction'
+import NavToHomeAction from '../actions/NavToHomeAction'
 
 //exported so it can be tested without mocking store
 export class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
 		this.state = { speedSliderMode: false }
-		this.incrementWord = this.incrementWord.bind(this)
-		this.startPlaying = this.startPlaying.bind(this)
+
+		this.incrementWord 		 = this.incrementWord.bind(this)
+		this.startPlaying 		 = this.startPlaying.bind(this)
+		this.backButtonHandler = this.backButtonHandler.bind(this)
 	}
 
-	incrementWord(interval, playing, action) {
+	static navigationOptions = {
+		header: null
+  }
 
+	incrementWord(interval, playing, action) {
 		this.countdown = setInterval(action, interval)
+	}
+
+	backButtonHandler() {
+		if(this.countdown) clearInterval(this.countdown)
+		this.props.NavToHomeAction()
 	}
 
 	startPlaying() {
@@ -48,17 +59,6 @@ export class PlayScreen extends Component {
 	componentWillUpdate(nextProps) {
 		clearInterval(this.countdown)
 	}
-
-	// shouldComponentUpdate(nextProps) {
-	// 	const { feed, PauseAction } = this.props
-	//
-	// 	if(nextProps.place === feed.length - 2) {
-	// 		PauseAction()
-	// 		return false
-	// 	} else {
-	// 		return true
-	// 	}
-	// }
 
 	componentDidUpdate() {
 		const { place, feed, speed, IncrementAction, playing, PauseAction } = this.props
@@ -106,9 +106,14 @@ export class PlayScreen extends Component {
 				revert={StopAction}
 				seek={SeekPlaceAction}
 				changeSpeed={ChangeSpeedAction}
+				back={this.backButtonHandler}
 			/>
 		}
-		return <View>{renderMode}</View>
+		return (
+			<View>
+				<View>{renderMode}</View>
+			</View>
+		)
 	}
 }
 
@@ -128,5 +133,6 @@ export default connect(mapStateToProps, {
 	StopAction,
 	IncrementAction,
 	SeekPlaceAction,
-	ChangeSpeedAction
+	ChangeSpeedAction,
+	NavToHomeAction
 })(PlayScreen)

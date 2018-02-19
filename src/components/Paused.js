@@ -93,6 +93,7 @@ export default class PausedMode extends Component {
 
     return (
       <View>
+        <Button title="<=" onPress={this.props.back} />
         {this.renderWord()}
         <View>{this.renderSlider()}</View>
         <Button title="place" onPress={() => this.sliderPicker(false)} />
