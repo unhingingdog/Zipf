@@ -32,6 +32,7 @@ export class PlayScreen extends Component {
 	}
 
 	incrementWord(interval, playing, action) {
+
 		this.countdown = setInterval(action, interval)
 	}
 
@@ -39,7 +40,6 @@ export class PlayScreen extends Component {
 		if(this.props.place === this.props.feed.length - 1) {
 			this.props.SeekPlaceAction(0)
 			this.props.PlayAction()
-			console.log('end')
 		} else {
 			this.props.PlayAction()
 		}
@@ -49,21 +49,26 @@ export class PlayScreen extends Component {
 		clearInterval(this.countdown)
 	}
 
-	shouldComponentUpdate(nextProps) {
-		const { feed, PauseAction } = this.props
-
-		if(nextProps.place === feed.length - 2) {
-			PauseAction()
-			return false
-		} else {
-			return true
-		}
-	}
+	// shouldComponentUpdate(nextProps) {
+	// 	const { feed, PauseAction } = this.props
+	//
+	// 	if(nextProps.place === feed.length - 2) {
+	// 		PauseAction()
+	// 		return false
+	// 	} else {
+	// 		return true
+	// 	}
+	// }
 
 	componentDidUpdate() {
-		const { place, feed, speed, IncrementAction, playing } = this.props
+		const { place, feed, speed, IncrementAction, playing, PauseAction } = this.props
 		const interval = feed[place].displayTime * (speed/50) //temp
-		if (this.props.playing) this.incrementWord(interval, playing, IncrementAction)
+
+		if (place == feed.length - 1) {
+			 setTimeout(PauseAction, interval)
+		} else {
+			if (this.props.playing) this.incrementWord(interval, playing, IncrementAction)
+		}
 	}
 
 	componentWillUnmount() {
