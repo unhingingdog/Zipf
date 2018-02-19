@@ -28,7 +28,7 @@ export const weightTotal = (word) => {
 export default textEngine = text => {
 	return new Promise((resolve, reject) => {
 		let feed = []
-		const splitText = text.split(' ')
+		const splitText = text.split(/\s/)
 		splitText.map(word => feed.push(
 			{ word, displayTime: weightTotal(word) }
 		))

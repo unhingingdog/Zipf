@@ -27,20 +27,26 @@ export class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
 		this.state = { speedSliderMode: false }
-		this.incrementWord     = this.incrementWord.bind(this)
+		this.incrementWord = this.incrementWord.bind(this)
+		this.startPlaying = this.startPlaying.bind(this)
 	}
 
 	incrementWord(interval, playing, action) {
 		this.countdown = setInterval(action, interval)
 	}
 
-	componentWillUpdate(nextProps) {
-		//const { place, feed } = this.props
-		clearInterval(this.countdown)
-
-		if(nextProps.place === this.props.feed.length - 2) {
-			PauseAction()
+	startPlaying() {
+		if(this.props.place === this.props.feed.length - 1) {
+			this.props.SeekPlaceAction(0)
+			this.props.PlayAction()
+			console.log('end')
+		} else {
+			this.props.PlayAction()
 		}
+	}
+
+	componentWillUpdate(nextProps) {
+		clearInterval(this.countdown)
 	}
 
 	shouldComponentUpdate(nextProps) {
@@ -91,7 +97,7 @@ export class PlayScreen extends Component {
 				totalTime={totalTime}
 				playing={playing}
 				speed={speed}
-				startPlaying={PlayAction}
+				startPlaying={this.startPlaying}
 				revert={StopAction}
 				seek={SeekPlaceAction}
 				changeSpeed={ChangeSpeedAction}
