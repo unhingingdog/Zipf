@@ -12,7 +12,7 @@ import TextEditor from './TextEditor'
 export class MainScreen extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { inputType: 'paste' }
+		this.state = { inputType: 'paste', loading: false }
 
 		this.selectInputType    = this.selectInputType.bind(this)
 		this.renderInputType    = this.renderInputType.bind(this)
@@ -31,7 +31,9 @@ export class MainScreen extends Component {
 
 	pasteButtonHandler() {
 		const { dispatch } = this.props.navigation
+		this.setState({ loading: true })
 		this.props.SubmitTextAction(dispatch)
+		this.setState({ loading: false })
 	}
 
 	formSubmitHandler() {

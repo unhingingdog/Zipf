@@ -1,81 +1,74 @@
 import React, { Component } from 'react'
-import { View, Text, Button, TouchableOpacity, Slider } from 'react-native'
-import Word from './Word'
 import Redux from 'redux'
 import { connect } from 'react-redux'
+
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	Slider,
+	Button,
+	Switch
+} from 'react-native'
+import Playing from '../src/components/Playing'
+import Paused from '../src/components/Paused'
+
 import {
 	IncrementAction,
 	PlayAction,
 	PauseAction,
 	StopAction,
-	SeekPlaceAction
-} from '../actions/PlayAction'
+	SeekPlaceAction,
+} from '../src/actions/PlayAction'
+import { ChangeSpeedAction } from '../src/actions/ChangeSpeedAction'
+import NavToHomeAction from '../src/actions/NavToHomeAction'
 
 //exported so it can be tested without mocking store
 export class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
+		this.state = { speedSliderMode: false }
 
-		this.playPressHandler  = this.playPressHandler.bind(this)
-		this.pausePressHandler = this.pausePressHandler.bind(this)
-		this.stopPressHandler  = this.stopPressHandler.bind(this)
-		this.playWord          = this.playWord.bind(this)
-		this.playerUIMode      = this.playerUIMode.bind(this)
-		this.slideHandler 	 = this.slideHandler.bind(this)
-
-		this.calculateRemainingReadTime = this.calculateRemainingReadTime.bind(this)
+		this.incrementWord 		 = this.incrementWord.bind(this)
+		this.startPlaying 		 = this.startPlaying.bind(this)
+		this.backButtonHandler = this.backButtonHandler.bind(this)
 	}
 
-	calculateRemainingReadTime(place, feed) {
-		let remainingTime = 0
-		for(let i = place; i < feed.length; i++) {
-			remainingTime += feed[i].displayTime
-		}
-		const seconds = (remainingTime/1000) % 60
-		const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
-		return minutes.toFixed().toString() + ':' + seconds.toFixed().toString()
-	}
+	static navigationOptions = {
+		header: null
+  }
 
-	playPressHandler() {
-		this.props.PlayAction()
-	}
-
-	pausePressHandler() {
-		this.props.PauseAction()
-	}
-
-	stopPressHandler() {
-		this.props.StopAction()
-	}
-
-	slideHandler(place) {
-		this.props.SeekPlaceAction(place)
-	}
-
-	playWord(interval, playing, action) {
+	incrementWord(interval, playing, action) {
 		this.countdown = setInterval(action, interval)
 	}
 
-	componentWillUpdate() {
-		const { place, feed } = this.props
-		clearInterval(this.countdown)
-		// if(place - 1 === feed.length) {
-		// 	this.props.PauseAction()
-		// }
+	backButtonHandler() {
+		if(this.countdown) clearInterval(this.countdown)
+		this.props.NavToHomeAction()
 	}
 
-	shouldComponentUpdate(nextProps) {
-		// if(nextProps.place === this.props.feed.length) {
-		// 	return false
-		// } else {
-		// 	return true
-		// }
+	startPlaying() {
+		if(this.props.place === this.props.feed.length - 1) {
+			this.props.SeekPlaceAction(0)
+			this.props.PlayAction()
+		} else {
+			this.props.PlayAction()
+		}
+	}
+
+	componentWillUpdate(nextProps) {
+		clearInterval(this.countdown)
 	}
 
 	componentDidUpdate() {
-		const { place, feed, IncrementAction, playing } = this.props
-		const interval = feed[place].displayTime
-		if (this.props.playing) this.playWord(interval, playing, IncrementAction)
+		const { place, feed, speed, IncrementAction, playing, PauseAction } = this.props
+		const interval = feed[place].displayTime * (speed/50) //temp
+
+		if (place == feed.length - 1) {
+			 setTimeout(PauseAction, interval)
+		} else {
+			if (this.props.playing) this.incrementWord(interval, playing, IncrementAction)
+		}
 	}
 
 	componentWillUnmount() {
@@ -83,38 +76,40 @@ export class PlayScreen extends Component {
 		this.props.StopAction()
 	}
 
-	playerUIMode() {
-		const { place, feed, playing } = this.props
-
-		if (playing) {
-			return(
-				<View className="playing">
-					<Text>{feed[place].word}</Text>
-					<Button title="pause" onPress={this.pausePressHandler}></Button>
-					<Button title="stop" onPress={this.stopPressHandler}></Button>
-				</View>
-			)
-		} else {
-			return(
-				<View className="not-playing">
-					<Text>{feed[place].word}</Text>
-					<Slider
-						maximumValue={feed.length}
-						onValueChange={this.slideHandler}
-						value={place}
-						step={1}
-					/>
-					<Text>{`${place} of ${feed.length}`}</Text>
-					<Text>{this.calculateRemainingReadTime(place, feed)}</Text>
-					<Button title="play" onPress={this.playPressHandler}></Button>
-				</View>
-			)
-		}
-	}
-
 	render() {
-		console.log(this.props.place)
-		return <View><TouchableOpacity>{this.playerUIMode()}</TouchableOpacity></View>
+		const {
+			feed,
+			place,
+			speed,
+			totalTime,
+			playing,
+			PlayAction,
+			StopAction,
+			SeekPlaceAction,
+			ChangeSpeedAction
+		} = this.props
+
+		let renderMode
+
+		if (this.props.playing) {
+			renderMode =
+				<Playing word={feed[place].word} pause={this.props.PauseAction} />
+		} else {
+			renderMode = <Paused
+				word={feed[place].word}
+				place={place}
+				feed={feed}
+				totalTime={totalTime}
+				playing={playing}
+				speed={speed}
+				startPlaying={this.startPlaying}
+				revert={StopAction}
+				seek={SeekPlaceAction}
+				changeSpeed={ChangeSpeedAction}
+				back={this.backButtonHandler}
+			/>
+		}
+		return <View>{renderMode}</View>
 	}
 }
 
@@ -122,7 +117,9 @@ const mapStateToProps = state => {
 	return {
 		playing: state.play.playing,
 		place: state.play.place,
-		feed: state.feed
+		feed: state.feed. feed,
+		totalTime: state.feed.totalDisplayTime,
+		speed: state.speed,
 	}
 }
 
@@ -131,5 +128,7 @@ export default connect(mapStateToProps, {
 	PauseAction,
 	StopAction,
 	IncrementAction,
-	SeekPlaceAction
+	SeekPlaceAction,
+	ChangeSpeedAction,
+	NavToHomeAction
 })(PlayScreen)

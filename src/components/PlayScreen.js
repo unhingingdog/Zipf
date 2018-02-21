@@ -62,7 +62,8 @@ export class PlayScreen extends Component {
 
 	componentDidUpdate() {
 		const { place, feed, speed, IncrementAction, playing, PauseAction } = this.props
-		const interval = feed[place].displayTime * (speed/50) //temp
+
+		const interval = (feed[place].displayTime / 100) * (100 - speed)
 
 		if (place == feed.length - 1) {
 			 setTimeout(PauseAction, interval)
@@ -109,11 +110,7 @@ export class PlayScreen extends Component {
 				back={this.backButtonHandler}
 			/>
 		}
-		return (
-			<View>
-				<View>{renderMode}</View>
-			</View>
-		)
+		return <View>{renderMode}</View>
 	}
 }
 

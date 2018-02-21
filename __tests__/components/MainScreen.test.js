@@ -2,6 +2,8 @@ import '../../jestUtils'
 import { MainScreen } from '../../fakeComponents/MainScreen'
 import TestRenderer from 'react-test-renderer'
 import toJSON from 'enzyme-to-json'
+import mock from 'react-native-mock-render/mock'
+import { mount } from 'enzyme'
 
 describe('MainScreen renders correctly', () => {
   let text
@@ -38,4 +40,17 @@ describe('MainScreen renders correctly', () => {
       expect(tree).toMatchSnapshot()
     })
   })
+
+  // describe('trying to mount with jsdom', () => {
+  //   it('calls the paste button', () => {
+  //     const pasteButton = component.find("PasteButton")
+  //     pasteButton.simulate('click')
+  //     //expect(component.props.SubmitTextAction).toHaveBeenCalled()
+  //     console.log(props.SubmitTextAction.calls())
+  //
+  //   })
+  //
+  // })
+
+
 })

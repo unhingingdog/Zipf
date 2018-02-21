@@ -24,7 +24,7 @@ export default class PausedMode extends Component {
     for(let i = place; i < feed.length; i++) {
       remainingTime += feed[i].displayTime
     }
-    remainingTime *= speed
+    //remainingTime *= speed
     let seconds = (remainingTime/1000) % 60
     const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
     seconds = seconds.toFixed().toString().length < 2 ?
@@ -73,6 +73,7 @@ export default class PausedMode extends Component {
     if(this.state.speedSliderMode) {
       return (<Slider
         maximumValue={100}
+        minimumValue={50}
         onSlidingComplete={this.props.changeSpeed}
         value={this.props.speed}
         step={1}
