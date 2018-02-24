@@ -11,11 +11,11 @@ global.React = React
 global.renderer = renderer
 global.shallow = shallow
 
-const { JSDOM } = jsdom;
+const { JSDOM } = jsdom
 const { document } = (new JSDOM('')).window;
 global.document = document
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {
     global[property] = document.defaultView[property];
   }
-});
+})

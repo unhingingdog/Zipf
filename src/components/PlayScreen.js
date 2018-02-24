@@ -78,6 +78,7 @@ export class PlayScreen extends Component {
 	}
 
 	render() {
+		console.log(this.props)
 		const {
 			feed,
 			place,

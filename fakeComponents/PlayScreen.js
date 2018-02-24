@@ -20,10 +20,9 @@ import {
 	StopAction,
 	SeekPlaceAction,
 } from '../src/actions/PlayAction'
-import { ChangeSpeedAction } from '../src/actions/ChangeSpeedAction'
-import NavToHomeAction from '../src/actions/NavToHomeAction'
-
-//exported so it can be tested without mocking store
+ import { ChangeSpeedAction } from '../src/actions/ChangeSpeedAction'
+//
+// //exported so it can be tested without mocking store
 export class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
@@ -62,7 +61,8 @@ export class PlayScreen extends Component {
 
 	componentDidUpdate() {
 		const { place, feed, speed, IncrementAction, playing, PauseAction } = this.props
-		const interval = feed[place].displayTime * (speed/50) //temp
+
+		const interval = ((100 - speed) / 100) * feed[place].displayTime
 
 		if (place == feed.length - 1) {
 			 setTimeout(PauseAction, interval)
@@ -96,6 +96,7 @@ export class PlayScreen extends Component {
 				<Playing word={feed[place].word} pause={this.props.PauseAction} />
 		} else {
 			renderMode = <Paused
+				className="Paused"
 				word={feed[place].word}
 				place={place}
 				feed={feed}
@@ -112,23 +113,3 @@ export class PlayScreen extends Component {
 		return <View>{renderMode}</View>
 	}
 }
-
-const mapStateToProps = state => {
-	return {
-		playing: state.play.playing,
-		place: state.play.place,
-		feed: state.feed. feed,
-		totalTime: state.feed.totalDisplayTime,
-		speed: state.speed,
-	}
-}
-
-export default connect(mapStateToProps, {
-	PlayAction,
-	PauseAction,
-	StopAction,
-	IncrementAction,
-	SeekPlaceAction,
-	ChangeSpeedAction,
-	NavToHomeAction
-})(PlayScreen)

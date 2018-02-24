@@ -73,7 +73,7 @@ export default class PausedMode extends Component {
     if(this.state.speedSliderMode) {
       return (<Slider
         maximumValue={100}
-        minimumValue={50}
+        minimumValue={1}
         onSlidingComplete={this.props.changeSpeed}
         value={this.props.speed}
         step={1}
@@ -103,7 +103,7 @@ export default class PausedMode extends Component {
         <Text>{this.calculateWordsPerMinute(totalTime, feed.length, speed)}</Text>
         <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
         <Text>{`Speed: ${speed}`}</Text>
-        <Button title="play" onPress={startPlaying}></Button>
+        <Button id="play" title="play" onPress={startPlaying}></Button>
         <Button title="stop" onPress={revert}></Button>
       </View>
     )
