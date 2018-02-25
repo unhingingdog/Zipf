@@ -24,7 +24,7 @@ export default class PausedMode extends Component {
     for(let i = place; i < feed.length; i++) {
       remainingTime += feed[i].displayTime
     }
-    //remainingTime *= speed
+    remainingTime *= (100 - speed) / 100
     let seconds = (remainingTime/1000) % 60
     const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
     seconds = seconds.toFixed().toString().length < 2 ?
@@ -33,7 +33,7 @@ export default class PausedMode extends Component {
   }
 
   calculateWordsPerMinute(totalTime, numberOfWords, speed) {
-    const timeInMinutes = totalTime / 60000
+    const timeInMinutes = (totalTime / 60000) * ((100 - speed) / 100)
     return (numberOfWords / timeInMinutes).toFixed().toString() + ' WPM'
   }
 
@@ -72,8 +72,8 @@ export default class PausedMode extends Component {
   renderSlider() {
     if(this.state.speedSliderMode) {
       return (<Slider
-        maximumValue={100}
-        minimumValue={1}
+        maximumValue={99}
+        minimumValue={40}
         onSlidingComplete={this.props.changeSpeed}
         value={this.props.speed}
         step={1}
