@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, Button, Slider } from 'react-native'
+import { Text, View, Button, Slider, StyleSheet } from 'react-native'
 
 export default class PausedMode extends Component {
   constructor(props) {

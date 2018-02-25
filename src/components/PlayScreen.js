@@ -4,11 +4,8 @@ import { connect } from 'react-redux'
 
 import {
 	View,
-	Text,
-	TouchableOpacity,
-	Slider,
-	Button,
-	Switch
+	StyleSheet,
+	Dimensions
 } from 'react-native'
 import Playing from './Playing'
 import Paused from './Paused'
@@ -27,16 +24,23 @@ import NavToHomeAction from '../actions/NavToHomeAction'
 export class PlayScreen extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { speedSliderMode: false }
+		this.state = { speedSliderMode: false, orientation: 'portrait' }
 
 		this.incrementWord 		 = this.incrementWord.bind(this)
 		this.startPlaying 		 = this.startPlaying.bind(this)
 		this.backButtonHandler = this.backButtonHandler.bind(this)
+		this.onLayout = this.onLayout.bind(this)
 	}
 
 	static navigationOptions = {
 		header: null
   }
+
+	onLayout(e) {
+		const { width, height } = Dimensions.get('window')
+		const orientation = width > height ? 'landscape' : 'portrait'
+		this.setState({ orientation })
+	}
 
 	incrementWord(interval, playing, action) {
 		this.countdown = setInterval(action, interval)
@@ -78,7 +82,6 @@ export class PlayScreen extends Component {
 	}
 
 	render() {
-		console.log(this.props)
 		const {
 			feed,
 			place,
@@ -95,7 +98,11 @@ export class PlayScreen extends Component {
 
 		if (this.props.playing) {
 			renderMode =
-				<Playing word={feed[place].word} pause={this.props.PauseAction} />
+				<Playing
+					word={feed[place].word}
+					pause={this.props.PauseAction}
+					orientation={this.state.orientation}
+				/>
 		} else {
 			renderMode = <Paused
 				word={feed[place].word}
@@ -109,9 +116,14 @@ export class PlayScreen extends Component {
 				seek={SeekPlaceAction}
 				changeSpeed={ChangeSpeedAction}
 				back={this.backButtonHandler}
+				orientation={this.state.orientation}
 			/>
 		}
-		return <View>{renderMode}</View>
+		return(
+			<View style={styles.style} onLayout={this.onLayout}>
+				{renderMode}
+			</View>
+		)
 	}
 }
 
@@ -134,3 +146,7 @@ export default connect(mapStateToProps, {
 	ChangeSpeedAction,
 	NavToHomeAction
 })(PlayScreen)
+
+const styles = StyleSheet.create({
+	style: { marginTop: 15 }
+})

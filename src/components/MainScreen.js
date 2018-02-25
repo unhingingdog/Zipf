@@ -14,11 +14,13 @@ export class MainScreen extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			orientation: 'portrait'
+			orientation: 'portrait',
+			clipboardMessage: ''
 		}
 
 		this.pasteButtonHandler = this.pasteButtonHandler.bind(this)
 		this.onLayout = this.onLayout.bind(this)
+		this.showClipboardMessage = this.showClipboardMessage.bind(this)
 	}
 
 	static navigationOptions = {
@@ -36,7 +38,13 @@ export class MainScreen extends Component {
 		this.props.SubmitTextAction(dispatch)
 	}
 
+	showClipboardMessage() {
+		const clipboardMessage = "(from your phone's clipboard)"
+		setTimeout(() => { this.setState({ clipboardMessage }) }, 10000)
+	}
+
 	render() {
+		if (!this.state.clipboardMessage) this.showClipboardMessage()
 		return (
 			<View style={styles.container} onLayout={this.onLayout}>
 				<TouchableOpacity
@@ -44,6 +52,7 @@ export class MainScreen extends Component {
 					style={styles.pasteButton}
 				>
 					<Text style={styles.buttonText}>Paste</Text>
+					<Text style={styles.subtext}>{this.state.clipboardMessage}</Text>
 				</TouchableOpacity>
 			</View>
 		)
@@ -75,5 +84,8 @@ const styles = StyleSheet.create({
 		fontFamily: 'System',
 		fontSize: 80,
 		fontWeight: "100"
+	},
+	subtext: {
+		color: 'grey'
 	}
 })
