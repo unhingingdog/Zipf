@@ -6,8 +6,7 @@ import {
 	SubmitTextAction,
 	SubmitTextFromEditorAction
 } from '../actions/SubmitTextAction'
-import PasteButton from './PasteButton'
-import TextEditor from './TextEditor'
+
 
 export class MainScreen extends Component {
 	constructor(props) {
@@ -29,12 +28,11 @@ export class MainScreen extends Component {
 	render() {
 		return (
 			<View>
-				<PasteButton
-					buttonMode={this.props.buttonMode}
-					textValue={this.props.text}
-					textChange={this.changeTextHandler}
-					pasteWithButton={this.pasteButtonHandler}
-				/>
+				<Button
+					title="Paste"
+					onPress={this.pasteButtonHandler}
+					//style={styles.buttonStyle}
+				></Button>
 			</View>
 		)
 	}
