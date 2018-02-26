@@ -38,7 +38,6 @@ export class MainScreen extends Component {
 
 
 	render() {
-		if (!this.state.clipboardMessage) this.showClipboardMessage()
 		return (
 			<View style={styles.container} onLayout={this.onLayout}>
 				<TouchableOpacity

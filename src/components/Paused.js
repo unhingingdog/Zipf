@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
-import { Text, View, Button, Slider, StyleSheet } from 'react-native'
+import {
+  Text,
+  View,
+  Button,
+  Slider,
+  StyleSheet,
+  TouchableOpacity
+} from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import { Segment } from 'native-base'
 
 export default class PausedMode extends Component {
   constructor(props) {
@@ -56,6 +65,8 @@ export default class PausedMode extends Component {
   }
 
   renderWord() {
+   const { word } = this.props
+
    if (this.state.placeSliderActive) {
      return(
       <View>
@@ -65,7 +76,13 @@ export default class PausedMode extends Component {
       </View>
      )
    } else {
-     return <Text>{this.props.word}</Text>
+     return(
+       <Text style={{
+         fontSize: word.length > 15 ? 39 : 50
+       }}>
+        {this.props.word}
+       </Text>
+    )
    }
   }
 
@@ -80,6 +97,7 @@ export default class PausedMode extends Component {
       />)
     } else {
       return (<Slider
+        style={styles.placeSlider}
         maximumValue={this.props.feed.length - 1}
         onValueChange={this.placeSliderActiveHandler}
         onSlidingComplete={this.placeSliderFinishedHandler}
@@ -90,22 +108,59 @@ export default class PausedMode extends Component {
   }
 
   render() {
-    const { place, speed, feed, totalTime, startPlaying, revert } = this.props
+    const {
+      place,
+      speed,
+      feed,
+      totalTime,
+      startPlaying,
+      revert,
+      back
+    } = this.props
 
     return (
-      <View>
-        <Button title="<=" onPress={this.props.back} />
-        {this.renderWord()}
-        <View>{this.renderSlider()}</View>
+      <View style={styles.container}>
+        <TouchableOpacity onPress={back}>
+          <Ionicons name="ios-arrow-dropleft-outline" size={50} />
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.wordContainerPortrait} onPress={startPlaying}>
+          {this.renderWord()}
+        </TouchableOpacity>
+        <View style={styles.sliderPickerContainer}>
+          {this.renderSlider()}
+        </View>
+        
         <Button title="place" onPress={() => this.sliderPicker(false)} />
         <Button title="speed" onPress={() => this.sliderPicker(true)} />
         <Text>{`${place + 1} of ${feed.length + 1}`}</Text>
         <Text>{this.calculateWordsPerMinute(totalTime, feed.length, speed)}</Text>
         <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
         <Text>{`Speed: ${speed}`}</Text>
-        <Button id="play" title="play" onPress={startPlaying}></Button>
         <Button title="stop" onPress={revert}></Button>
       </View>
     )
   }
 }
+const styles = StyleSheet.create({
+	container: {
+    margin: 10,
+  },
+  wordContainerPortrait: {
+    paddingTop: 50,
+    paddingBottom: 50,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  sliderPickerContainer: {
+    margin: 8
+  },
+  sliderPicker: {
+
+  },
+  activeWord: {
+
+  },
+  placeSlider: {
+
+  }
+})
