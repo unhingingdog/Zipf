@@ -148,5 +148,9 @@ export default connect(mapStateToProps, {
 })(PlayScreen)
 
 const styles = StyleSheet.create({
-	style: { marginTop: 15 }
+	style: {
+		paddingTop: 15,
+		flex: 1,
+		backgroundColor: 'white'
+	 }
 })

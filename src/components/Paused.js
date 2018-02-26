@@ -129,7 +129,7 @@ export default class PausedMode extends Component {
         <View style={styles.sliderPickerContainer}>
           {this.renderSlider()}
         </View>
-        
+
         <Button title="place" onPress={() => this.sliderPicker(false)} />
         <Button title="speed" onPress={() => this.sliderPicker(true)} />
         <Text>{`${place + 1} of ${feed.length + 1}`}</Text>
