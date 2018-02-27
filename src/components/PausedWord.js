@@ -16,9 +16,11 @@ export default class PausedWord extends Component {
    if (placeSliderActive) {
      return(
       <View style={styles.sliderWordPreview}>
-        <Text style={styles.previousWord}>{sliderWordPreview[0]}</Text>
+        <Text style={styles.twoAdjacent}>{sliderWordPreview[3]}</Text>
+        <Text style={styles.adjacentWord}>{sliderWordPreview[0]}</Text>
         <Text style={styles.currentWord}>{sliderWordPreview[1]}</Text>
-        <Text style={styles.nextWord}>{sliderWordPreview[2]}</Text>
+        <Text style={styles.adjacentWord}>{sliderWordPreview[2]}</Text>
+        <Text style={styles.twoAdjacent}>{sliderWordPreview[4]}</Text>
       </View>
      )
    } else {
@@ -38,9 +40,9 @@ export default class PausedWord extends Component {
     if (placeSliderActive) {
       return(
        <View style={styles.sliderWordPreviewLS}>
-         <Text style={styles.previousWordLS}>{sliderWordPreview[0]}</Text>
+         <Text style={styles.adjacentWordLS}>{sliderWordPreview[0]}</Text>
          <Text style={styles.currentWordLS}>{sliderWordPreview[1]}</Text>
-         <Text style={styles.nextWordLS}>{sliderWordPreview[2]}</Text>
+         <Text style={styles.adjacentWordLS}>{sliderWordPreview[2]}</Text>
        </View>
       )
     } else {
@@ -56,30 +58,25 @@ export default class PausedWord extends Component {
 
 const styles = StyleSheet.create({
   sliderWordPreview: {
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  previousWord: {
-    fontSize: 30,
-    color: 'grey',
-
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   currentWord: {
     fontSize: 50
   },
-  nextWord: {
+  adjacentWord: {
+    fontSize: 40,
+    color: '#727272'
+  },
+  twoAdjacent: {
     fontSize: 30,
-    color: 'grey'
+    color: '#D3D3D3'
   },
   sliderWordPreviewLS: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
-  },
-  previousWordLS: {
-    fontSize: 40,
-    color: 'grey',
-
   },
   currentWordLS: {
     fontSize: 60,
@@ -87,7 +84,7 @@ const styles = StyleSheet.create({
     paddingRight: '5%',
     alignSelf: 'center'
   },
-  nextWordLS: {
+  adjacentWordLS: {
     fontSize: 40,
     color: 'grey'
   }

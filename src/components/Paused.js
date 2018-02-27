@@ -35,7 +35,15 @@ export default class PausedMode extends Component {
     const currentWord = feed[place] ? feed[place].word : ' '
     const previousWord = feed[place - 1] ? feed[place - 1].word : ' '
     const nextWord = feed[place + 1] ? feed[place + 1].word : ' '
-    this.setState({ sliderWordPreview: [previousWord, currentWord, nextWord] })
+    const twoWordsPrevious = feed[place - 2] ? feed[place + 1].word : ' '
+    const twoWordsAhead = feed[place + 2] ? feed[place + 1].word : ' '
+    this.setState({ sliderWordPreview: [
+      previousWord,
+      currentWord,
+      nextWord,
+      twoWordsPrevious,
+      twoWordsAhead
+    ]})
   }
 
   placeSliderFinishedHandler(place) {
@@ -98,7 +106,7 @@ export default class PausedMode extends Component {
             action={revert}
           />
         </View>
-        <TouchableOpacity style={styles.wordContainerPortrait} onPress={startPlaying}>
+        <TouchableOpacity style={styles.wordContainer} onPress={startPlaying}>
           <PausedWord
             word={word}
             place={place}
@@ -132,9 +140,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  wordContainerPortrait: {
-    paddingTop: 50,
-    paddingBottom: 50,
+  wordContainer: {
+    minHeight: '50%',
     justifyContent: 'center',
     alignItems: 'center'
   },
