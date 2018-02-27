@@ -8,8 +8,8 @@ import {
   TouchableOpacity
 } from 'react-native'
 import PausedWord from './PausedWord'
+import SpeedPanel from './SpeedPanel'
 import { Ionicons } from '@expo/vector-icons'
-
 
 export default class PausedMode extends Component {
   constructor(props) {
@@ -23,27 +23,6 @@ export default class PausedMode extends Component {
     this.placeSliderActiveHandler 	= this.placeSliderActiveHandler.bind(this)
     this.placeSliderFinishedHandler = this.placeSliderFinishedHandler.bind(this)
     this.renderSlider 	 		        = this.renderSlider.bind(this)
-    this.calculateRemainingReadTime = this.calculateRemainingReadTime.bind(this)
-    this.calculateWordsPerMinute    = this.calculateWordsPerMinute.bind(this)
-
-  }
-
-  calculateRemainingReadTime(place, feed, speed) {
-    let remainingTime = 0
-    for(let i = place; i < feed.length; i++) {
-      remainingTime += feed[i].displayTime
-    }
-    remainingTime *= (100 - speed) / 100
-    let seconds = (remainingTime/1000) % 60
-    const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
-    seconds = seconds.toFixed().toString().length < 2 ?
-      '0' + seconds.toFixed().toString() : seconds.toFixed().toString()
-    return minutes.toFixed().toString() + ':' + seconds
-  }
-
-  calculateWordsPerMinute(totalTime, numberOfWords, speed) {
-    const timeInMinutes = (totalTime / 60000) * ((100 - speed) / 100)
-    return (numberOfWords / timeInMinutes).toFixed().toString() + ' WPM'
   }
 
   sliderPicker(mode) {
@@ -123,10 +102,12 @@ export default class PausedMode extends Component {
 
         <Button title="place" onPress={() => this.sliderPicker(false)} />
         <Button title="speed" onPress={() => this.sliderPicker(true)} />
-        <Text>{`${place + 1} of ${feed.length + 1}`}</Text>
-        <Text>{this.calculateWordsPerMinute(totalTime, feed.length, speed)}</Text>
-        <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
-        <Text>{`Speed: ${speed}`}</Text>
+        <SpeedPanel
+          place={place}
+          feed={feed}
+          speed={speed}
+          totalTime={totalTime}
+        />
         <Button title="stop" onPress={revert}></Button>
       </View>
     )
