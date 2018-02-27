@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import {
   Text,
   View,
-  Button,
   Slider,
   StyleSheet,
   TouchableOpacity
 } from 'react-native'
+
 import PausedWord from './PausedWord'
 import SpeedPanel from './SpeedPanel'
-import { Ionicons } from '@expo/vector-icons'
+import Button from './Button'
 
 export default class PausedMode extends Component {
   constructor(props) {
@@ -84,9 +84,7 @@ export default class PausedMode extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={back}>
-          <Ionicons name="ios-arrow-dropleft-outline" size={50} />
-        </TouchableOpacity>
+        <Button iconName="ios-arrow-dropleft-outline" size={50} action={back} />
         <TouchableOpacity style={styles.wordContainerPortrait} onPress={startPlaying}>
           <PausedWord
             word={word}
