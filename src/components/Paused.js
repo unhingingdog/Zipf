@@ -84,7 +84,18 @@ export default class PausedMode extends Component {
 
     return (
       <View style={styles.container}>
-        <Button iconName="ios-arrow-dropleft-outline" size={50} action={back} />
+        <View style={styles.headerButtons}>
+          <Button
+            iconName="ios-arrow-dropleft-outline"
+            size={50}
+            action={back}
+          />
+          <Button
+            iconName="ios-refresh-circle-outline"
+            size={50}
+            action={revert}
+          />
+        </View>
         <TouchableOpacity style={styles.wordContainerPortrait} onPress={startPlaying}>
           <PausedWord
             word={word}
@@ -106,7 +117,6 @@ export default class PausedMode extends Component {
           speed={speed}
           totalTime={totalTime}
         />
-        <Button title="stop" onPress={revert}></Button>
       </View>
     )
   }
@@ -114,6 +124,10 @@ export default class PausedMode extends Component {
 const styles = StyleSheet.create({
 	container: {
     margin: 10,
+  },
+  headerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   wordContainerPortrait: {
     paddingTop: 50,
