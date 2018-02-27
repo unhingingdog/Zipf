@@ -1,10 +1,10 @@
 import React, { Component} from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 
 export default class PausedWord extends Component {
   constructor(props) {
     super(props)
-    
+
     this.renderWord          = this.renderWord.bind(this)
     this.renderWordLandscape = this.renderWordLandscape.bind(this)
   }
@@ -15,10 +15,10 @@ export default class PausedWord extends Component {
 
    if (placeSliderActive) {
      return(
-      <View>
-        <Text>{sliderWordPreview[0]}</Text>
-        <Text>{sliderWordPreview[1]}</Text>
-        <Text>{sliderWordPreview[2]}</Text>
+      <View style={styles.sliderWordPreview}>
+        <Text style={styles.previousWord}>{sliderWordPreview[0]}</Text>
+        <Text style={styles.currentWord}>{sliderWordPreview[1]}</Text>
+        <Text style={styles.nextWord}>{sliderWordPreview[2]}</Text>
       </View>
      )
    } else {
@@ -37,7 +37,7 @@ export default class PausedWord extends Component {
 
     if (placeSliderActive) {
       return(
-       <View>
+       <View style={styles.sliderWordPreview}>
          <Text>{sliderWordPreview[0]}</Text>
          <Text>{sliderWordPreview[1]}</Text>
          <Text>{sliderWordPreview[2]}</Text>
@@ -53,3 +53,22 @@ export default class PausedWord extends Component {
       this.renderWord() : this.renderWordLandscape())
   }
 }
+
+const styles = StyleSheet.create({
+  sliderWordPreview: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  previousWord: {
+    fontSize: 30,
+    color: 'grey',
+
+  },
+  currentWord: {
+    fontSize: 50
+  },
+  nextWord: {
+    fontSize: 30,
+    color: 'grey'
+  }
+})

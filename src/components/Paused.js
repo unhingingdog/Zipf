@@ -60,6 +60,7 @@ export default class PausedMode extends Component {
         onSlidingComplete={this.placeSliderFinishedHandler}
         value={this.props.place}
         step={1}
+        minimumTrackTintColor="orange"
       />)
     }
   }
