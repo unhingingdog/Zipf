@@ -7,6 +7,7 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native'
+import PausedWord from './PausedWord'
 import { Ionicons } from '@expo/vector-icons'
 
 
@@ -21,7 +22,6 @@ export default class PausedMode extends Component {
 
     this.placeSliderActiveHandler 	= this.placeSliderActiveHandler.bind(this)
     this.placeSliderFinishedHandler = this.placeSliderFinishedHandler.bind(this)
-    this.renderWord                 = this.renderWord.bind(this)
     this.renderSlider 	 		        = this.renderSlider.bind(this)
     this.calculateRemainingReadTime = this.calculateRemainingReadTime.bind(this)
     this.calculateWordsPerMinute    = this.calculateWordsPerMinute.bind(this)
@@ -64,28 +64,6 @@ export default class PausedMode extends Component {
     this.props.seek(place)
   }
 
-  renderWord() {
-   const { word } = this.props
-
-   if (this.state.placeSliderActive) {
-     return(
-      <View>
-        <Text>{this.state.sliderWordPreview[0]}</Text>
-        <Text>{this.state.sliderWordPreview[1]}</Text>
-        <Text>{this.state.sliderWordPreview[2]}</Text>
-      </View>
-     )
-   } else {
-     return(
-       <Text style={{
-         fontSize: word.length > 15 ? 39 : 50
-       }}>
-        {this.props.word}
-       </Text>
-    )
-   }
-  }
-
   renderSlider() {
     if(this.state.speedSliderMode) {
       return (<Slider
@@ -112,11 +90,18 @@ export default class PausedMode extends Component {
       place,
       speed,
       feed,
+      word,
       totalTime,
       startPlaying,
       revert,
-      back
+      back,
+      orientation
     } = this.props
+
+    const {
+      sliderWordPreview,
+      placeSliderActive
+    } = this.state
 
     return (
       <View style={styles.container}>
@@ -124,7 +109,13 @@ export default class PausedMode extends Component {
           <Ionicons name="ios-arrow-dropleft-outline" size={50} />
         </TouchableOpacity>
         <TouchableOpacity style={styles.wordContainerPortrait} onPress={startPlaying}>
-          {this.renderWord()}
+          <PausedWord
+            word={word}
+            place={place}
+            sliderWordPreview={sliderWordPreview}
+            orientation={orientation}
+            placeSliderActive={placeSliderActive}
+          />
         </TouchableOpacity>
         <View style={styles.sliderPickerContainer}>
           {this.renderSlider()}
