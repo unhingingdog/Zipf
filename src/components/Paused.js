@@ -91,6 +91,7 @@ export default class PausedMode extends Component {
             size={50}
             action={back}
           />
+          <Text>{`${place + 1} of ${feed.length + 1}`}</Text>
           <Button
             iconName="ios-refresh-circle-outline"
             size={50}
@@ -128,7 +129,8 @@ const styles = StyleSheet.create({
   },
   headerButtons: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   wordContainerPortrait: {
     paddingTop: 50,

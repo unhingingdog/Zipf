@@ -37,10 +37,10 @@ export default class PausedWord extends Component {
 
     if (placeSliderActive) {
       return(
-       <View style={styles.sliderWordPreview}>
-         <Text>{sliderWordPreview[0]}</Text>
-         <Text>{sliderWordPreview[1]}</Text>
-         <Text>{sliderWordPreview[2]}</Text>
+       <View style={styles.sliderWordPreviewLS}>
+         <Text style={styles.previousWordLS}>{sliderWordPreview[0]}</Text>
+         <Text style={styles.currentWordLS}>{sliderWordPreview[1]}</Text>
+         <Text style={styles.nextWordLS}>{sliderWordPreview[2]}</Text>
        </View>
       )
     } else {
@@ -69,6 +69,26 @@ const styles = StyleSheet.create({
   },
   nextWord: {
     fontSize: 30,
+    color: 'grey'
+  },
+  sliderWordPreviewLS: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+  previousWordLS: {
+    fontSize: 40,
+    color: 'grey',
+
+  },
+  currentWordLS: {
+    fontSize: 60,
+    paddingLeft: '5%',
+    paddingRight: '5%',
+    alignSelf: 'center'
+  },
+  nextWordLS: {
+    fontSize: 40,
     color: 'grey'
   }
 })

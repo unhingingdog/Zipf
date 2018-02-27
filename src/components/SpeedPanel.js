@@ -36,7 +36,6 @@ export default class SpeedPanel extends Component {
 
     return(
       <View>
-        <Text>{`${place + 1} of ${feed.length + 1}`}</Text>
         <Text>{this.calculateWordsPerMinute(totalTime, feed.length, speed)}</Text>
         <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
         <Text>{`Speed: ${speed}`}</Text>
