@@ -66,8 +66,9 @@ export class PlayScreen extends Component {
 
 	componentDidUpdate() {
 		const { place, feed, speed, IncrementAction, playing, PauseAction } = this.props
+		const maxDisplayTime = feed[place].displayTime
 
-		const interval = (feed[place].displayTime / 100) * (100 - speed)
+		const interval = (maxDisplayTime / 100) * (100 - speed)
 
 		if (place == feed.length - 1) {
 			 setTimeout(PauseAction, interval)

@@ -1,6 +1,6 @@
 import { CHANGE_SPEED } from '../actions/types'
 
-initial_state = 40
+initial_state = 50
 
 export default (state = initial_state, action) => {
   const { type, payload } = action

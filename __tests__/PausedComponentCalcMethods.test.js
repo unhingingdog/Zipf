@@ -1,4 +1,4 @@
-import Paused from '../src/components/Paused'
+import Paused from '../src/components/SpeedPanel'
 
 import '../jestUtils'
 
