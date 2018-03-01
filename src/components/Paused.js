@@ -15,18 +15,12 @@ export default class PausedMode extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      speedSliderMode: false,
       placeSliderActive: false,
       sliderWordPreview: []
     }
 
     this.placeSliderActiveHandler 	= this.placeSliderActiveHandler.bind(this)
     this.placeSliderFinishedHandler = this.placeSliderFinishedHandler.bind(this)
-    this.renderSlider 	 		        = this.renderSlider.bind(this)
-  }
-
-  sliderPicker(mode) {
-    this.setState({ speedSliderMode: mode })
   }
 
   placeSliderActiveHandler(place) {
@@ -51,28 +45,6 @@ export default class PausedMode extends Component {
     this.props.seek(place)
   }
 
-  renderSlider() {
-    if(this.state.speedSliderMode) {
-      return (<Slider
-        maximumValue={99}
-        minimumValue={40}
-        onSlidingComplete={this.props.changeSpeed}
-        value={this.props.speed}
-        step={1}
-      />)
-    } else {
-      return (<Slider
-        style={styles.placeSlider}
-        maximumValue={this.props.feed.length - 1}
-        onValueChange={this.placeSliderActiveHandler}
-        onSlidingComplete={this.placeSliderFinishedHandler}
-        value={this.props.place}
-        step={1}
-        minimumTrackTintColor="orange"
-      />)
-    }
-  }
-
   render() {
     const {
       place,
@@ -83,7 +55,8 @@ export default class PausedMode extends Component {
       startPlaying,
       revert,
       back,
-      orientation
+      orientation,
+      changeSpeed
     } = this.props
 
     const {
@@ -116,16 +89,23 @@ export default class PausedMode extends Component {
           />
         </TouchableOpacity>
         <View style={styles.sliderPickerContainer}>
-          {this.renderSlider()}
+        <Slider
+          style={styles.placeSlider}
+          maximumValue={this.props.feed.length - 1}
+          onValueChange={this.placeSliderActiveHandler}
+          onSlidingComplete={this.placeSliderFinishedHandler}
+          value={this.props.place}
+          step={1}
+          minimumTrackTintColor="orange"
+        />
         </View>
 
-        <Button title="place" onPress={() => this.sliderPicker(false)} />
-        <Button title="speed" onPress={() => this.sliderPicker(true)} />
         <SpeedPanel
           place={place}
           feed={feed}
           speed={speed}
           totalTime={totalTime}
+          changeSpeed={changeSpeed}
         />
       </View>
     )

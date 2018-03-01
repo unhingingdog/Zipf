@@ -1,5 +1,7 @@
 import React,{ Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Slider, StyleSheet } from 'react-native'
+import Button from './Button'
+import { Ionicons } from '@expo/vector-icons'
 
 export default class SpeedPanel extends Component {
   constructor(props) {
@@ -31,15 +33,84 @@ export default class SpeedPanel extends Component {
       place,
       feed,
       speed,
-      totalTime
+      totalTime,
+      changeSpeed
     } = this.props
 
+    // <Slider
+    //   maximumValue={99}
+    //   minimumValue={40}
+    //   onSlidingComplete={this.props.changeSpeed}
+    //   value={this.props.speed}
+    //   step={1}
+    // />
+
+    //ios-car
+    //ios-car-outline
+    // ios-jet ios-jet-outline
+    //ios-walk
+    //ios-flash-outline
+    //ios-bicycle
+
     return(
-      <View>
-        <Text>{this.calculateWordsPerMinute(totalTime, feed.length, speed)}</Text>
-        <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
-        <Text>{`Speed: ${speed}`}</Text>
+      <View style={styles.container}>
+        <View style={styles.speedChooser}>
+          <Button
+            iconName="ios-arrow-dropleft-outline"
+            size={50}
+            action={() => changeSpeed(speed + 1)}
+          />
+          <View style={styles.speedDisplay}>
+            <Text style={styles.speed} >{speed}</Text>
+            <Text style={styles.speedLabel} >Speed</Text>
+          </View>
+          <Button
+            iconName="ios-arrow-dropleft-outline"
+            size={50}
+            action={() => changeSpeed(speed - 1)}
+          />
+        </View>
+        <View style={styles.speedCalcs}>
+          <Text>{this.calculateWordsPerMinute(totalTime, feed.length, speed)}</Text>
+          <Text>{this.calculateRemainingReadTime(place, feed, speed)}</Text>
+        </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: '7%'
+  },
+  speedChooser: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignContent: 'center',
+    borderStyle: 'solid',
+    borderRadius: 5,
+    backgroundColor: '#f2f2f2',
+    marginLeft: '20%',
+    marginRight: '20%'
+  },
+  speedDisplay: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingLeft: 25,
+    paddingRight: 25
+  },
+  speed: {
+    fontSize: 30,
+    color: 'white'
+  },
+  speedLabel: {
+
+  },
+  speedCalcs: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  }
+})
