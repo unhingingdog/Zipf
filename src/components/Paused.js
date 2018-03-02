@@ -10,6 +10,7 @@ import {
 import PausedWord from './PausedWord'
 import SpeedPanel from './SpeedPanel'
 import Button from './Button'
+import Footer from './Footer'
 
 export default class PausedMode extends Component {
   constructor(props) {
@@ -29,8 +30,8 @@ export default class PausedMode extends Component {
     const currentWord = feed[place] ? feed[place].word : ' '
     const previousWord = feed[place - 1] ? feed[place - 1].word : ' '
     const nextWord = feed[place + 1] ? feed[place + 1].word : ' '
-    const twoWordsPrevious = feed[place - 2] ? feed[place + 1].word : ' '
-    const twoWordsAhead = feed[place + 2] ? feed[place + 1].word : ' '
+    const twoWordsPrevious = feed[place - 2] ? feed[place + -2].word : ' '
+    const twoWordsAhead = feed[place + 2] ? feed[place + 2].word : ' '
     this.setState({ sliderWordPreview: [
       previousWord,
       currentWord,
@@ -99,13 +100,18 @@ export default class PausedMode extends Component {
           minimumTrackTintColor="orange"
         />
         </View>
-
         <SpeedPanel
           place={place}
           feed={feed}
           speed={speed}
           totalTime={totalTime}
           changeSpeed={changeSpeed}
+        />
+        <Footer
+          totalTime={totalTime}
+          feed={feed}
+          speed={speed}
+          place={place}
         />
       </View>
     )
@@ -114,6 +120,9 @@ export default class PausedMode extends Component {
 const styles = StyleSheet.create({
 	container: {
     margin: 10,
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'column',
   },
   headerButtons: {
     flexDirection: 'row',
@@ -127,14 +136,5 @@ const styles = StyleSheet.create({
   },
   sliderPickerContainer: {
     margin: 8
-  },
-  sliderPicker: {
-
-  },
-  activeWord: {
-
-  },
-  placeSlider: {
-
   }
 })

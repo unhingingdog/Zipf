@@ -40,3 +40,5 @@ export default textEngine = text => {
 			verifyWord === feed[feed.length - 1] ? resolve(feed) : reject(error)
 	})
 }
+
+//number contains /1234567890/ - more numbers = longer display

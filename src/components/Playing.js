@@ -1,11 +1,26 @@
 import React from 'react'
-import { Text, View, Button } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 
-export default ({ word, pause }) => {
+export default ({ word, pause, orientation }) => {
   return(
-    <View>
-      <Text>{ word }</Text>
-      <Button title="pause" onPress={pause}></Button>
+    <View style={styles.container}>
+      <TouchableOpacity onPress={pause} style={styles.touchable}>
+        <Text style={styles.word}>{ word }</Text>
+      </TouchableOpacity>
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  touchable: {
+
+  },
+  word: {
+    fontSize: 50
+  }
+})
