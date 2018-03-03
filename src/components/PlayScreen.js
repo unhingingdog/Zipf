@@ -30,7 +30,7 @@ export class PlayScreen extends Component {
 		this.startPlaying 		 = this.startPlaying.bind(this)
 		this.backButtonHandler = this.backButtonHandler.bind(this)
 		this.onLayout 				 = this.onLayout.bind(this)
-		this.isiPhoneX				 = this.isiPhoneX.bind(this)
+		this.isPortraitiPhoneX = this.isPortraitiPhoneX.bind(this)
 	}
 
 	static navigationOptions = {
@@ -43,9 +43,10 @@ export class PlayScreen extends Component {
 		this.setState({ orientation })
 	}
 
-	isiPhoneX() {
+	isPortraitiPhoneX() {
 		const { width, height } = Dimensions.get('window')
-		if (height === 812 || width === 812) return true
+		if (height === 812 || width === 812
+				&& this.state.orientation === 'portrait') return true
 		return false
 	}
 
@@ -102,7 +103,7 @@ export class PlayScreen extends Component {
 			ChangeSpeedAction
 		} = this.props
 
-		const styles = this.isiPhoneX() ?
+		const styles = this.isPortraitiPhoneX() ?
       iphoneXStyles : normalStyles
 
 		let renderMode
