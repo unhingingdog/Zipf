@@ -37,8 +37,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: '7%'
+    justifyContent: 'center'
   },
   speedChooser: {
     flexDirection: 'row',

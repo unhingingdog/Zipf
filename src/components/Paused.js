@@ -65,6 +65,9 @@ export default class PausedMode extends Component {
       placeSliderActive
     } = this.state
 
+    const styles = orientation === 'portrait' ?
+      portraitStyles : landscapeStyles
+
     return (
       <View style={styles.container}>
         <View style={styles.headerButtons}>
@@ -117,7 +120,7 @@ export default class PausedMode extends Component {
     )
   }
 }
-const styles = StyleSheet.create({
+const portraitStyles = StyleSheet.create({
 	container: {
     margin: 10,
     flex: 1,
@@ -132,7 +135,30 @@ const styles = StyleSheet.create({
   wordContainer: {
     minHeight: '50%',
     justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '7%'
+  },
+  sliderPickerContainer: {
+    margin: 8
+  }
+})
+
+const landscapeStyles = StyleSheet.create({
+	container: {
+    margin: 10,
+    flex: 1,
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
+  headerButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center'
+  },
+  wordContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: '7%'
   },
   sliderPickerContainer: {
     margin: 8

@@ -11,12 +11,12 @@ export default class Footer extends Component {
 
   calculateRemainingReadTime(place, feed, speed) {
     //const maxDisplayTime = feed[place].displayTime
+    //const interval = (maxDisplayTime / 100) * (100 - speed)
 
     let remainingTime = 0
     for(let i = place; i < feed.length; i++) {
-      remainingTime += feed[i].displayTime
+      remainingTime += (feed[i].displayTime / 100) * (100 - speed)
     }
-    remainingTime *= (100 - speed) / 100
     let seconds = (remainingTime/1000) % 60
     const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
     seconds = seconds.toFixed().toString().length < 2 ?

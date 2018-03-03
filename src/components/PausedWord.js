@@ -46,7 +46,7 @@ export default class PausedWord extends Component {
        </View>
       )
     } else {
-      return <Text style={{ fontSize: 80 }}>{word}</Text>
+      return <Text style={{ fontSize: 70 }}>{word}</Text>
     }
   }
 

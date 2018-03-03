@@ -29,7 +29,8 @@ export class PlayScreen extends Component {
 		this.incrementWord 		 = this.incrementWord.bind(this)
 		this.startPlaying 		 = this.startPlaying.bind(this)
 		this.backButtonHandler = this.backButtonHandler.bind(this)
-		this.onLayout = this.onLayout.bind(this)
+		this.onLayout 				 = this.onLayout.bind(this)
+		this.isiPhoneX				 = this.isiPhoneX.bind(this)
 	}
 
 	static navigationOptions = {
@@ -40,6 +41,12 @@ export class PlayScreen extends Component {
 		const { width, height } = Dimensions.get('window')
 		const orientation = width > height ? 'landscape' : 'portrait'
 		this.setState({ orientation })
+	}
+
+	isiPhoneX() {
+		const { width, height } = Dimensions.get('window')
+		if (height === 812 || width === 812) return true
+		return false
 	}
 
 	incrementWord(interval, playing, action) {
@@ -95,6 +102,9 @@ export class PlayScreen extends Component {
 			ChangeSpeedAction
 		} = this.props
 
+		const styles = this.isiPhoneX() ?
+      iphoneXStyles : normalStyles
+
 		let renderMode
 
 		if (this.props.playing) {
@@ -103,6 +113,8 @@ export class PlayScreen extends Component {
 					word={feed[place].word}
 					pause={this.props.PauseAction}
 					orientation={this.state.orientation}
+					place={place}
+					length={feed.length - 1}
 				/>
 		} else {
 			renderMode = <Paused
@@ -148,10 +160,17 @@ export default connect(mapStateToProps, {
 	NavToHomeAction
 })(PlayScreen)
 
-const styles = StyleSheet.create({
+const normalStyles = StyleSheet.create({
 	style: {
-		paddingTop: 15,
 		flex: 1,
 		backgroundColor: 'white'
+	 }
+})
+
+const iphoneXStyles = StyleSheet.create({
+	style: {
+		flex: 1,
+		backgroundColor: 'white',
+		paddingTop: '10%'
 	 }
 })
