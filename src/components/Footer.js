@@ -10,9 +10,6 @@ export default class Footer extends Component {
   }
 
   calculateRemainingReadTime(place, feed, speed) {
-    //const maxDisplayTime = feed[place].displayTime
-    //const interval = (maxDisplayTime / 100) * (100 - speed)
-
     let remainingTime = 0
     for(let i = place; i < feed.length; i++) {
       remainingTime += (feed[i].displayTime / 100) * (100 - speed)
@@ -49,7 +46,6 @@ export default class Footer extends Component {
       </View>
     )
   }
-
 }
 
 const styles = StyleSheet.create({

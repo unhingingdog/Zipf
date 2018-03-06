@@ -164,7 +164,8 @@ export default connect(mapStateToProps, {
 const normalStyles = StyleSheet.create({
 	style: {
 		flex: 1,
-		backgroundColor: 'white'
+		backgroundColor: 'white',
+		paddingTop: '2%'
 	 }
 })
 

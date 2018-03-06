@@ -1,26 +1,42 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MainScreen renders correctly default UI matches the default snapshot 1`] = `
-<View>
-  <PasteButton
-    pasteWithButton={[Function]}
-    textChange={[Function]}
-    textValue="test this shit"
-  />
-  <Button
-    className="textModeButton"
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "backgroundColor": "white",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <TouchableOpacity
+    activeOpacity={0.2}
     onPress={[Function]}
-    title="Input text"
-  />
-  <Button
-    className="speakModeButton"
-    onPress={[Function]}
-    title="Speak"
-  />
-  <Button
-    className="pasteModeButton"
-    onPress={[Function]}
-    title="paste from clipboard"
-  />
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "white",
+        "margin": "10%",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      disabled={false}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "System",
+          "fontSize": 80,
+          "fontWeight": "100",
+        }
+      }
+    >
+      Paste
+    </Text>
+  </TouchableOpacity>
 </View>
 `;

@@ -16,11 +16,3 @@ export const SubmitTextAction = (dispatch, clipboard = Clipboard) => {
 		navigateToScreen(dispatch, 'PlayScreen')
 	}
 }
-
-export const SubmitTextFromEditorAction = (dispatch, content) => {
-	return async dispatch => {
-		const payload = await weightEngine(content, default_speed)
-		dispatch({ type: SUBMIT_TEXT, payload })
-		navigateToScreen(dispatch, 'PlayScreen')
-	}
-}

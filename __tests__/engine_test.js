@@ -56,7 +56,7 @@ describe("Text engine", () => {
   describe("Puncuation weighting (weightByPuncuation)", () => {
     it('correctly weighs the last word of a sentence', () => {
       expect(weightByPuncuation('stellarator.'))
-        .toEqual(puncuationWeights.endOfSentence)
+        .toEqual(puncuationWeights.fullStop)
     })
   })
 
@@ -70,12 +70,12 @@ describe("Text engine", () => {
       expect(weightTotal('stellarator.'))
         .toEqual(frequencyDefaultWeight
                  + wordLengthWeights.moreThan_7
-                 + puncuationWeights.endOfSentence
+                 + puncuationWeights.fullStop
         )
     })
 
     it('passes a hard coded test for sanity', () => {
-      expect(weightTotal('stellarator.')).toEqual(2400)
+      expect(weightTotal('stellarator.')).toEqual(2200)
     })
   })
 })

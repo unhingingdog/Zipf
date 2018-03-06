@@ -1,7 +1,4 @@
-import Paused from '../src/components/SpeedPanel'
-
 import '../jestUtils'
-
 
 describe('Calculate remaining time and WPM', () => {
   let feed, speed, totalDisplayTime, props, expectedFormattedTime
@@ -18,20 +15,22 @@ describe('Calculate remaining time and WPM', () => {
     place = 0
     speed = 0
 
-    props = {
-      word: feed[place].word,
-      totalTime,
-      speed,
-      place,
-      playing: false,
-      feed
+    calculateRemainingReadTime = (place, feed, speed) => {
+      let remainingTime = 0
+      for(let i = place; i < feed.length; i++) {
+        remainingTime += (feed[i].displayTime / 100) * (100 - speed)
+      }
+      let seconds = (remainingTime/1000) % 60
+      const minutes = (((remainingTime / 1000 - seconds)) % 3600) / 60
+      seconds = seconds.toFixed().toString().length < 2 ?
+        '0' + seconds.toFixed().toString() : seconds.toFixed().toString()
+      return minutes.toFixed().toString() + ':' + seconds
     }
 
-    const wrapper = shallow(<Paused {...props} />)
-    const instance = wrapper.instance()
-
-    calculateRemainingReadTime = instance.calculateRemainingReadTime
-    calculateWordsPerMinute = instance.calculateWordsPerMinute
+    calculateWordsPerMinute = (totalTime, numberOfWords, speed) => {
+      const timeInMinutes = (totalTime / 60000) * ((100 - speed) / 100)
+      return (numberOfWords / timeInMinutes).toFixed().toString() + ' WPM'
+    }
   })
 
   describe('caclulate remaining time', () => {

@@ -14,18 +14,20 @@ export default class SpeedPanel extends Component {
       <View style={styles.container}>
         <View style={styles.speedChooser}>
           <Button
-            iconName="ios-arrow-down"
+            iconName="ios-remove-circle"
             size={50}
             action={() => changeSpeed(speed - 1)}
+            color="grey"
           />
           <View style={styles.speedDisplay}>
             <Text style={styles.speed} >{speed - 50}</Text>
             <Text style={styles.speedLabel} >Speed</Text>
           </View>
           <Button
-            iconName="ios-arrow-up"
+            iconName="ios-add-circle"
             size={50}
             action={() => changeSpeed(speed + 1)}
+            color="grey"
           />
         </View>
       </View>

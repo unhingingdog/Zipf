@@ -4,34 +4,36 @@
 //the hack the original component.
 
 import React, { Component } from 'react'
-import { View, Text, Button, Clipboard } from 'react-native'
-import { connect } from 'react-redux'
-import { TextChangedAction } from '../src/actions/TextChangedAction'
 import {
-	SubmitTextAction,
-	SubmitTextFromEditorAction
-} from '../src/actions/SubmitTextAction'
-import PasteButton from '../src/components/PasteButton'
-import TextEditor from '../src/components/TextEditor'
+	View,
+	Text,
+	TouchableOpacity,
+	StyleSheet,
+	Dimensions
+} from 'react-native'
+import { connect } from 'react-redux'
+import { SubmitTextAction } from '../src/actions/SubmitTextAction'
+
 
 export class MainScreen extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { inputType: 'paste' }
+		this.state = {
+			orientation: 'portrait',
+		}
 
-		this.selectInputType    = this.selectInputType.bind(this)
-		this.renderInputType    = this.renderInputType.bind(this)
-		this.changeTextHandler  = this.changeTextHandler.bind(this)
 		this.pasteButtonHandler = this.pasteButtonHandler.bind(this)
-		this.formSubmitHandler  = this.formSubmitHandler.bind(this)
+		this.onLayout = this.onLayout.bind(this)
 	}
 
 	static navigationOptions = {
 		header: null
 	}
 
-	changeTextHandler(text) {
-		this.props.TextChangedAction(text)
+	onLayout(e) {
+		const { width, height } = Dimensions.get('window')
+		const orientation = width > height ? 'landscape' : 'portrait'
+		this.setState({ orientation })
 	}
 
 	pasteButtonHandler() {
@@ -39,60 +41,16 @@ export class MainScreen extends Component {
 		this.props.SubmitTextAction(dispatch)
 	}
 
-	formSubmitHandler() {
-		const { dispatch } = this.props.navigation
-		this.props.SubmitTextFromEditorAction(dispatch, this.props.text)
-	}
-
-	selectInputType(inputType) {
-		this.setState({ inputType })
-	}
-
-	renderInputType() {
-		const paste = <PasteButton
-			buttonMode={this.props.buttonMode}
-			textValue={this.props.text}
-			textChange={this.changeTextHandler}
-			pasteWithButton={this.pasteButtonHandler}
-		/>
-
-		const text = 	<TextEditor
-			textValue={this.props.text}
-			textChange={this.changeTextHandler}
-			submitText={this.formSubmitHandler}
-		/>
-
-		switch(this.state.inputType) {
-			case 'paste':
-				return paste
-			case 'text':
-				return text
-			case 'voice':
-				return <Text>Watson voice to text to be implemeneted</Text>
-			default:
-				return paste
-		}
-	}
 
 	render() {
 		return (
-			<View>
-				{this.renderInputType()}
-				<Button
-					className="textModeButton"
-					title="Input text"
-					onPress={() => this.selectInputType('text')}
-				/>
-				<Button
-					className="speakModeButton"
-					title="Speak"
-					onPress={() => this.selectInputType('voice')}
-				/>
-				<Button
-					className="pasteModeButton"
-					title="paste from clipboard"
-					onPress={() => this.selectInputType('paste')}
-				/>
+			<View style={styles.container} onLayout={this.onLayout}>
+				<TouchableOpacity
+					onPress={this.pasteButtonHandler}
+					style={styles.pasteButton}
+				>
+					<Text style={styles.buttonText}>Paste</Text>
+				</TouchableOpacity>
 			</View>
 		)
 	}
@@ -105,7 +63,26 @@ const mapStateToProps = state => {
 }
 
 export default connect(mapStateToProps, {
-	TextChangedAction,
 	SubmitTextAction,
-	SubmitTextFromEditorAction
 })(MainScreen)
+
+const styles = StyleSheet.create({
+	pasteButton: {
+		backgroundColor: 'white',
+		alignItems: 'center',
+		margin: '10%'
+	},
+	container: {
+		flex: 1,
+		backgroundColor: 'white',
+		justifyContent: 'center',
+	},
+	buttonText: {
+		fontFamily: 'System',
+		fontSize: 80,
+		fontWeight: "100"
+	},
+	subtext: {
+		color: 'grey'
+	}
+})

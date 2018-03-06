@@ -7,8 +7,11 @@ export default (state = initial_state, action) => {
 
   switch(type) {
     case CHANGE_SPEED:
-      if (payload < 100 && payload > 50) return payload
-      return state
+      if (payload < 100 && payload > 50) {
+        return payload
+      } else {
+        return state
+      }
     default:
       return state
   }

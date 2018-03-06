@@ -47,10 +47,4 @@ describe('Async actions', () => {
     const dispatchedActions = store.getActions()
     expect(store.getActions()[0]).toEqual(expectedAction)
 	})
-
-  it('should call SubmitTextFromEditorAction with correct action', async () => {
-    await store.dispatch(SubmitTextFromEditorAction(null, testText))
-    const dispatchedActions = store.getActions()
-    expect(store.getActions()[0]).toEqual(expectedAction)
-  })
 })

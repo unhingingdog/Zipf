@@ -28,29 +28,8 @@ describe('MainScreen renders correctly', () => {
   })
 
   describe('default UI', () => {
-    it('has the correct default state', () => {
-      expect(component.state().inputType).toEqual('paste')
-    })
-
-    it('renders the default buttons', () => {
-      expect(component.find("Button").length).toEqual(3)
-      expect(component.find("PasteButton").length).toEqual(1)
-    })
     it('matches the default snapshot', () => {
       expect(tree).toMatchSnapshot()
     })
   })
-
-  // describe('trying to mount with jsdom', () => {
-  //   it('calls the paste button', () => {
-  //     const pasteButton = component.find("PasteButton")
-  //     pasteButton.simulate('click')
-  //     //expect(component.props.SubmitTextAction).toHaveBeenCalled()
-  //     console.log(props.SubmitTextAction.calls())
-  //
-  //   })
-  //
-  // })
-
-
 })

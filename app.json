@@ -3,7 +3,13 @@
     "sdkVersion": "22.0.0",
     "splash": {
       "image": "./src/assets/splash-screen.png",
-      "resizeMode": "cover"
+      "resizeMode": "cover",
+    },
+    "slug": "zipf",
+    "version": "0.9.0",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hgilkison.zipf",
     }
   }
 }

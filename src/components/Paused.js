@@ -76,7 +76,7 @@ export default class PausedMode extends Component {
             size={50}
             action={back}
           />
-          <Text>{`${place + 1} of ${feed.length + 1}`}</Text>
+          <Text>{`${place + 1} of ${feed.length}`}</Text>
           <Button
             iconName="ios-refresh-circle-outline"
             size={50}

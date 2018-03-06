@@ -16,7 +16,14 @@ export const weightByLength = word => {
 }
 
 export const weightByPuncuation = word => {
-	return word[word.length - 1] ==='.' ? puncuationWeights.endOfSentence : 0
+	switch(word[word.length - 1]) {
+		case '.':
+			return puncuationWeights.fullStop
+		case ',':
+			return puncuationWeights.comma
+		default:
+			return 0
+	}
 }
 
 export const weightTotal = (word) => {
@@ -40,5 +47,3 @@ export default textEngine = text => {
 			verifyWord === feed[feed.length - 1] ? resolve(feed) : reject(error)
 	})
 }
-
-//number contains /1234567890/ - more numbers = longer display
