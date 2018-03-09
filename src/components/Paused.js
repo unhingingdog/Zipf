@@ -6,13 +6,14 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native'
+import PropTypes from 'prop-types'
 
 import PausedWord from './PausedWord'
 import SpeedPanel from './SpeedPanel'
 import Button from './Button'
 import Footer from './Footer'
 
-export default class PausedMode extends Component {
+export default class Paused extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -120,6 +121,20 @@ export default class PausedMode extends Component {
     )
   }
 }
+
+Paused.propTypes = {
+  place: PropTypes.number.isRequired,
+  speed: PropTypes.number.isRequired,
+  feed: PropTypes.array.isRequired,
+  word: PropTypes.string,
+  totalTime: PropTypes.number.isRequired,
+  startPlaying: PropTypes.func.isRequired,
+  revert: PropTypes.func.isRequired,
+  back: PropTypes.func.isRequired,
+  orientation: PropTypes.string.isRequired,
+  changeSpeed: PropTypes.func.isRequired
+}
+
 const portraitStyles = StyleSheet.create({
 	container: {
     margin: 10,

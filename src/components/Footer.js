@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
 import { Ionicons } from '@expo/vector-icons'
 
 export default class Footer extends Component {
@@ -46,6 +47,13 @@ export default class Footer extends Component {
       </View>
     )
   }
+}
+
+Footer.propTypes = {
+  totalTime: PropTypes.number.isRequired,
+  feed: PropTypes.array.isRequired,
+  speed: PropTypes.number.isRequired,
+  place: PropTypes.number.isRequired
 }
 
 const styles = StyleSheet.create({

@@ -1,5 +1,6 @@
 import React, { Component} from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
 
 export default class PausedWord extends Component {
   constructor(props) {
@@ -54,6 +55,12 @@ export default class PausedWord extends Component {
     return(this.props.orientation === 'portrait' ?
       this.renderWord() : this.renderWordLandscape())
   }
+}
+
+PausedWord.propTypes = {
+  word: PropTypes.string,
+  sliderWordPreview: PropTypes.func.isRequired,
+  placeSliderActive: PropTypes.func.isRequired
 }
 
 const styles = StyleSheet.create({

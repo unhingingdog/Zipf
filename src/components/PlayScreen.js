@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Redux from 'redux'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import {
 	View,
@@ -145,7 +146,7 @@ const mapStateToProps = state => {
 	return {
 		playing: state.play.playing,
 		place: state.play.place,
-		feed: state.feed. feed,
+		feed: state.feed.feed,
 		totalTime: state.feed.totalDisplayTime,
 		speed: state.speed,
 	}
@@ -160,6 +161,14 @@ export default connect(mapStateToProps, {
 	ChangeSpeedAction,
 	NavToHomeAction
 })(PlayScreen)
+
+PlayScreen.propTypes = {
+	playing: PropTypes.bool.isRequired,
+	place: PropTypes.number.isRequired,
+	feed: PropTypes.array.isRequired,
+	totalTime: PropTypes.number.isRequired,
+	speed: PropTypes.number.isRequired
+}
 
 const normalStyles = StyleSheet.create({
 	style: {

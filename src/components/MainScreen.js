@@ -4,7 +4,8 @@ import {
 	Text,
 	TouchableOpacity,
 	StyleSheet,
-	Dimensions
+	Dimensions,
+	Image
 } from 'react-native'
 import { connect } from 'react-redux'
 import { SubmitTextAction } from '../actions/SubmitTextAction'
@@ -46,6 +47,12 @@ export class MainScreen extends Component {
 				>
 					<Text style={styles.buttonText}>Paste</Text>
 				</TouchableOpacity>
+				<TouchableOpacity style={styles.logoButton}>
+					<Image
+						source={require('../assets/zipf-logo-small.png')}
+						style={styles.logo}
+					/>
+				</TouchableOpacity>
 			</View>
 		)
 	}
@@ -62,22 +69,35 @@ export default connect(mapStateToProps, {
 })(MainScreen)
 
 const styles = StyleSheet.create({
-	pasteButton: {
-		backgroundColor: 'white',
-		alignItems: 'center',
-		margin: '10%'
-	},
 	container: {
 		flex: 1,
 		backgroundColor: 'white',
 		justifyContent: 'center',
 	},
+	pasteButton: {
+		flex: 9,
+		flexDirection: 'column',
+		backgroundColor: 'white',
+		alignItems: 'center',
+		justifyContent: 'center',
+		margin: '10%',
+		paddingTop: '12%'
+	},
 	buttonText: {
 		fontFamily: 'System',
 		fontSize: 80,
-		fontWeight: "100"
+		fontWeight: "bold"
 	},
-	subtext: {
-		color: 'grey'
+	logoButton: {
+		flexDirection: 'row',
+		flex: 1,
+		alignSelf: 'flex-end',
+		alignItems: 'flex-end',
+		justifyContent: 'flex-end',
+		padding: 10
+	},
+	logo: {
+		width: 70,
+		height: 70
 	}
 })

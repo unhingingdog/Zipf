@@ -2,7 +2,8 @@ import {
 	wordLengthWeights,
 	puncuationWeights,
 	wordFrequencyWeights,
-	frequencyDefaultWeight
+	frequencyDefaultWeight,
+	digitWeights
 } from './weightConfig'
 
 
@@ -21,15 +22,39 @@ export const weightByPuncuation = word => {
 			return puncuationWeights.fullStop
 		case ',':
 			return puncuationWeights.comma
+		case ':':
+			return puncuationWeights.colon
+		case ';':
+			return puncuationWeights.semiColon
 		default:
 			return 0
 	}
 }
 
-export const weightTotal = (word) => {
+export const weightByDigits = word => {
+	const largeNumber = /[0-9]{6}/
+	const mediumNumber = /[0-9]{3}/
+	const smallNumber = /[0-9]{1}/
+
+	if(largeNumber.test(word)) return digitWeights.largeNumber
+	if(mediumNumber.test(word)) return digitWeights.mediumNumber
+	if(smallNumber.test(word)) return digitWeights.smallNumber
+	return 0
+}
+
+export const weightByHyphen = word => {
+	const hyphen = /-/
+
+	if (hyphen.test(word)) return puncuationWeights.hyphen
+	return 0
+}
+
+export const weightTotal = word => {
 	return (weighByFrequency(word)
 				 + weightByLength(word)
-				 + weightByPuncuation(word))
+				 + weightByPuncuation(word)
+				 + weightByDigits(word)
+			 	)
 }
 
 export default textEngine = text => {

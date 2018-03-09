@@ -6,8 +6,9 @@ import {
   ProgressViewIOS,
   StyleSheet
 } from 'react-native'
+import PropTypes from 'prop-types'
 
-export default ({ word, pause, orientation, place, length }) => {
+const Playing = ({ word, pause, orientation, place, length }) => {
   const styles = orientation === 'portrait' ?
     portraitStyles : landscapeStyles
 
@@ -24,6 +25,16 @@ export default ({ word, pause, orientation, place, length }) => {
       />
     </View>
   )
+}
+
+export default Playing
+
+Playing.propTypes = {
+	word: PropTypes.string.isRequired,
+	pause: PropTypes.func.isRequired,
+	orientation: PropTypes.string.isRequired,
+	place: PropTypes.number.isRequired,
+	length: PropTypes.number.isRequired
 }
 
 const portraitStyles = StyleSheet.create({
