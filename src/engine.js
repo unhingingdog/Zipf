@@ -54,10 +54,11 @@ export const weightTotal = word => {
 				 + weightByLength(word)
 				 + weightByPuncuation(word)
 				 + weightByDigits(word)
+				 + weightByHyphen(word)
 			 	)
 }
 
-export default textEngine = text => {
+export default text => {
 	return new Promise((resolve, reject) => {
 		let feed = []
 		const splitText = text.split(/\s/)

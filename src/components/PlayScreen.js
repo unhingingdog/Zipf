@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Redux from 'redux'
 import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-
 import {
 	View,
 	StyleSheet,
@@ -10,6 +8,7 @@ import {
 } from 'react-native'
 import Playing from './Playing'
 import Paused from './Paused'
+import PropTypes from 'prop-types'
 
 import {
 	IncrementAction,
@@ -20,6 +19,8 @@ import {
 } from '../actions/PlayAction'
 import { ChangeSpeedAction } from '../actions/ChangeSpeedAction'
 import NavToHomeAction from '../actions/NavToHomeAction'
+
+import defaultFeed from '../assets/defaultFeed'
 
 //exported so it can be tested without mocking store
 export class PlayScreen extends Component {
@@ -169,6 +170,8 @@ PlayScreen.propTypes = {
 	totalTime: PropTypes.number.isRequired,
 	speed: PropTypes.number.isRequired
 }
+
+PlayScreen.defaultProps = { feed: defaultFeed }
 
 const normalStyles = StyleSheet.create({
 	style: {

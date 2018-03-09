@@ -8,8 +8,11 @@ import {
 	Image
 } from 'react-native'
 import { connect } from 'react-redux'
-import { SubmitTextAction } from '../actions/SubmitTextAction'
 
+import {
+	SubmitTextAction,
+	submitDefaultTextAction
+} from '../actions/SubmitTextAction'
 
 export class MainScreen extends Component {
 	constructor(props) {
@@ -19,6 +22,7 @@ export class MainScreen extends Component {
 		}
 
 		this.pasteButtonHandler = this.pasteButtonHandler.bind(this)
+		this.defaultTextSubmitHandler = this.defaultTextSubmitHandler.bind(this)
 		this.onLayout = this.onLayout.bind(this)
 	}
 
@@ -37,6 +41,10 @@ export class MainScreen extends Component {
 		this.props.SubmitTextAction(dispatch)
 	}
 
+	defaultTextSubmitHandler() {
+		const { dispatch } = this.props.navigation
+		this.props.submitDefaultTextAction(dispatch)
+	}
 
 	render() {
 		return (
@@ -47,7 +55,10 @@ export class MainScreen extends Component {
 				>
 					<Text style={styles.buttonText}>Paste</Text>
 				</TouchableOpacity>
-				<TouchableOpacity style={styles.logoButton}>
+				<TouchableOpacity
+					onPress={this.defaultTextSubmitHandler}
+					style={styles.logoButton}
+				>
 					<Image
 						source={require('../assets/zipf-logo-small.png')}
 						style={styles.logo}
@@ -66,6 +77,7 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps, {
 	SubmitTextAction,
+	submitDefaultTextAction
 })(MainScreen)
 
 const styles = StyleSheet.create({
