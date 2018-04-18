@@ -87,15 +87,16 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 	},
 	pasteButton: {
+		backgroundColor: 'yellow',
 		flex: 9,
 		flexDirection: 'column',
 		backgroundColor: 'white',
 		alignItems: 'center',
 		justifyContent: 'center',
 		margin: '10%',
-		paddingTop: '12%'
 	},
 	buttonText: {
+		paddingTop: '5%',
 		fontFamily: 'System',
 		fontSize: 80,
 		fontWeight: "bold"

@@ -6,10 +6,12 @@
       "resizeMode": "cover",
     },
     "slug": "zipf",
-    "version": "0.9.0",
+    "version": "1.0.0",
+    "icon": "./src/assets/zipf-logo-large.png",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.hgilkison.zipf",
+      "bundleIdentifier": "com.hgilkison.zipfreader",
+      "buildNumber": "1.0.0"
     }
   }
 }
